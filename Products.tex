@@ -1,0 +1,88 @@
+\documentclass[12pt]{article}
+\usepackage{amsmath,amssymb,amsfonts}
+\usepackage{tikz-cd}
+\usepackage{geometry}
+\geometry{margin=1in}
+
+\title{Morphisms in the Opposite Fibration via Spans}
+\author{Compiled for Siya}
+\date{}
+
+\begin{document}
+	
+	\maketitle
+	
+	\section*{Setup}
+	
+	Let \( P : \mathbf{E} \to \mathbf{B} \) be a fibration. The opposite fibration is defined as:
+	\[
+	P^{\mathrm{op}} : \mathbf{E}^{\mathrm{op}} \to \mathbf{B}^{\mathrm{op}}
+	\]
+	We aim to describe morphisms in \( P^{\mathrm{op}} \) using spans in the original category \( \mathbf{E} \).
+	
+	\section*{Morphisms in \( P^{\mathrm{op}} \)}
+	
+	Given:
+	\begin{itemize}
+		\item An object \( Y \in \mathbf{E}_J \)
+		\item An object \( X \in \mathbf{E}_I \)
+		\item A morphism \( u : J \to I \) in \( \mathbf{B}^{\mathrm{op}} \), i.e., \( u : I \to J \) in \( \mathbf{B} \)
+	\end{itemize}
+	
+	A morphism in \( P^{\mathrm{op}} \) from \( Y \) to \( X \) over \( u \) is encoded by a span in \( \mathbf{E} \):
+	\[
+	X \xleftarrow{\text{vertical}} e \xrightarrow{\text{cartesian over } u} Y
+	\]
+	where:
+	\begin{itemize}
+		\item \( e \to Y \) is a cartesian morphism over \( u : I \to J \)
+		\item \( e \to X \) is a vertical morphism over \( \mathrm{id}_I \)
+	\end{itemize}
+	
+	\section*{Diagram}
+	
+	\[
+	\begin{tikzcd}
+		& e \arrow[dl, "\text{vertical}"'] \arrow[dr, "\text{cartesian over } u"] & \\
+		X \arrow[d, "P"'] & & Y \arrow[d, "P"] \\
+		I & & J \arrow[ll, "u"]
+	\end{tikzcd}
+	\]
+	
+	\section*{Why This Encodes a Morphism in the Opposite Direction}
+	
+	In the original fibration \( P \), morphisms go forward along base change: pulling back \( Y \) along \( u : I \to J \) yields \( u^*Y \in \mathbf{E}_I \).
+	
+	In \( P^{\mathrm{op}} \), we want a morphism from \( Y \in \mathbf{E}_J \) to \( X \in \mathbf{E}_I \) over \( u : J \to I \). Since we cannot directly go backward, we simulate this by:
+	\begin{enumerate}
+		\item Pulling back \( Y \) along \( u \) to get \( e = u^*Y \)
+		\item Connecting \( e \) to \( X \) via a vertical morphism
+	\end{enumerate}
+	
+	This span represents a morphism in \( \mathbf{E}^{\mathrm{op}} \) from \( Y \) to \( X \) over \( u \).
+	
+	\section*{Equivalence Classes Under Vertical Isomorphism}
+	
+	Spans are considered equivalent if there exists a vertical isomorphism \( v : e \to e' \) such that the following diagram commutes:
+	\[
+	\begin{tikzcd}
+		& e \arrow[dl, "\text{vertical}"'] \arrow[dr, "\text{cartesian}"] \arrow[dd, "v", "\cong"'] & \\
+		X & & Y \\
+		& e' \arrow[ul, "\text{vertical}"] \arrow[ur, "\text{cartesian}"'] &
+	\end{tikzcd}
+	\]
+	
+	This equivalence is justified by the universal property of cartesian morphisms: any two cartesian lifts of the same morphism are uniquely isomorphic via a vertical morphism.
+	
+	\section*{Why \( P^{\mathrm{op}} \) Is a Category}
+	
+	By taking equivalence classes of spans under vertical isomorphism:
+	\begin{itemize}
+		\item Composition becomes strictly associative
+		\item Identity morphisms are well-defined
+		\item We avoid coherence data required in bicategories
+	\end{itemize}
+	
+	Thus, \( P^{\mathrm{op}} \) forms a genuine category, not just a bicategory of spans.
+	
+\end{document}

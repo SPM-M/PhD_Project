@@ -1,0 +1,20 @@
+\babel@toc {english}{}\relax 
+\contentsline {section}{\numberline {1}Depend Sums and Products}{3}{section.1}%
+\contentsline {section}{\numberline {2}Opfibrations}{3}{section.2}%
+\contentsline {section}{\numberline {3}Geometric Morphisms as Fibrations}{4}{section.3}%
+\contentsline {section}{\numberline {4}Closure Properties of Fibrations}{6}{section.4}%
+\contentsline {section}{\numberline {5}Internal Sums}{8}{section.5}%
+\contentsline {section}{\numberline {6}Internal Products}{12}{section.6}%
+\contentsline {section}{\numberline {7}Fibred Terminal Objects}{13}{section.7}%
+\contentsline {section}{\numberline {8}Fibred Pullbacks}{15}{section.8}%
+\contentsline {section}{\numberline {9}Fibrations of 2-categories}{16}{section.9}%
+\contentsline {section}{\numberline {10}Fibrant Double Categories}{16}{section.10}%
+\contentsline {section}{\numberline {11}Double Fibred Limits}{18}{section.11}%
+\contentsline {subsection}{\numberline {11.1}Double Terminals}{18}{subsection.11.1}%
+\contentsline {subsection}{\numberline {11.2}Double Fibred Pullbacks}{19}{subsection.11.2}%
+\contentsline {subsection}{\numberline {11.3}Tabulators and Fibred Tabulators}{23}{subsection.11.3}%
+\contentsline {section}{\numberline {12}Dual Notions}{27}{section.12}%
+\contentsline {subsection}{\numberline {12.1}2-Opfibrations}{27}{subsection.12.1}%
+\contentsline {subsection}{\numberline {12.2}Double Bifibrations}{27}{subsection.12.2}%
+\contentsline {subsubsection}{\numberline {12.2.1}Relation to 2-fibrations}{28}{subsubsection.12.2.1}%
+\contentsline {section}{\numberline {13}Double Internal Products}{28}{section.13}%

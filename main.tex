@@ -1,0 +1,1348 @@
+\documentclass{article}
+\usepackage{amsmath, amsthm, amssymb, amsfonts, mathrsfs,relsize, thmtools, mathtools, stmaryrd, mlmodern, graphicx, setspace, geometry, float, quiver, xspace, hyperref, framed, tcolorbox, mathrsfs, enumerate}
+\usepackage[T1]{fontenc}
+\usepackage[all]{xy}
+\usepackage[utf8]{inputenc}
+\usepackage[english]{babel}
+\usepackage[dvipsnames]{xcolor}
+\usepackage[document]{ragged2e}
+
+\xyoption{curve}
+\xyoption{2cell}
+\UseAllTwocells
+
+% other symbols
+\newcommand{\isom}{\cong}
+\DeclareMathOperator{\idem}{E}
+\DeclareMathOperator{\supp}{supp}
+\DeclareMathOperator{\End}{End}
+\DeclareMathOperator{\Inc}{Inc}
+\DeclareMathOperator{\img}{im}
+\DeclareMathOperator{\jac}{J}
+\DeclareMathOperator{\fib}{\textit{P} \colon \mathcal{E} \longrightarrow \mathcal{B}}
+\DeclareMathOperator{\opfib}{\textit{P} \colon \mathcal{E}^{op} \longrightarrow \mathcal{B}^{op}}
+\DeclareMathOperator{\comp}{\circ}
+\DeclareMathOperator{\mor}{\longrightarrow}
+\DeclareMathOperator{\is}{\equiv}
+\DeclareMathOperator{\forw}{\Longrightarrow}
+\DeclareMathOperator{\back}{\Longleftarrow}
+\DeclareMathOperator{\adj}{\dashv}
+\DeclareMathOperator{\2cell}{\Longrightarrow}
+
+
+
+\newcommand{\dfib}[3]{\cat{#1} \colon \mathbb{#2} \longrightarrow \mathbb{#3}}
+\newcommand{\compdfib}[4]{\cat{#1}_{#4} \colon \mathbb{#2}_{#4} \longrightarrow \mathbb{#3}_{#4}}
+\newcommand*{\dcat}[1]{\mathbb{#1}}
+\newcommand*{\bspan}[1]{\mathbb{S}\text{pan}(#1)}
+\newcommand*{\slice}[1]{\mathcal{C}/#1}
+\newcommand*{\slicec}[1]{\mathbf{Fib}/#1}
+\newcommand*{\dspan}[1]{\mathbb{S}\mathbf{pan}(#1)}
+\newcommand{\cat}[1]{\mathcal{#1}}
+\newcommand{\hspan}[5]{\xymatrix@=.7cm{#1 & #2 \ar[l]_{#4}  \ar[r]^{#5} & #3}}
+\newcommand{\cospan}[5]{\xymatrix@=.7cm{#1 \ar[r]^{#4} & #2 & #3 \ar[l]_{#5} & }}
+\newcommand{\proar}[2]{\xymatrix@=.7cm{#1 \ar[r]|-{\shortmid} & #2}}
+\newcommand{\inproar}[3]{\xymatrix@=.7cm{#2 \ar[r]|-{\shortmid}^{#1} & #3}}
+\newcommand{\lproar}[2]{\xymatrix@=.7cm{#1 \ar[l]|-{\shortmid} & #2}}
+\newcommand{\pushoutcorner}[1][dr]{\save*!/#1+1.2pc/#1:(1,-1)@^{|-}\restore}
+\newcommand{\pullbackcorner}[1][dr]{\save*!/#1-1.2pc/#1:(-1,1)@^{|-}\restore}
+\newcommand{\chapquote}[2]{\begin{quotation} \textit{#1} \end{quotation} \begin{flushright} - #2 \end{flushright} }
+\newcommand{\cleav}[2]{\varphi(#1,#2)}
+\newcommand{\ter}[1]{1_{\mathcal{#1}}}
+
+\def\ie{i.e.\@\xspace}
+
+
+
+
+\colorlet{Gray}{White!90!Periwinkle}
+\colorlet{Orange}{Orange!40}
+\colorlet{Green}{Green!40}
+\colorlet{Blue}{Blue!40}
+\colorlet{Goldenrod}{Goldenrod!40}
+
+\newcommand{\HRule}[1]{\rule{\linewidth}{#1}}
+
+\declaretheoremstyle[name=Theorem,]{thmsty}
+\declaretheorem[style=thmsty,numberwithin=section]{theorem}
+\tcolorboxenvironment{theorem}{colback=Gray}
+
+\declaretheoremstyle[name=Proposition,]{prosty}
+\declaretheorem[style=prosty,numberlike=theorem]{proposition}
+\tcolorboxenvironment{proposition}{colback=Orange}
+
+\declaretheoremstyle[name=Definition,]{definition}
+\declaretheorem[style=definition,numberwithin=section]{definition}
+\tcolorboxenvironment{definition}{colback=Green}
+
+\declaretheoremstyle[name=Remark,]{remark}
+\declaretheorem[style=remark,numberlike=theorem]{remark}
+\tcolorboxenvironment{remark}{colback=Blue}
+
+\declaretheoremstyle[name=Example,]{example}
+\declaretheorem[style=example,numberlike=theorem]{example}
+\tcolorboxenvironment{example}{colback=Cyan}
+
+\declaretheoremstyle[name=Lemma,]{lemma}
+\declaretheorem[style=lemma,numberlike=theorem]{lemma}
+\tcolorboxenvironment{lemma}{colback=Goldenrod}
+
+
+
+\def\ie{i.e.\@\xspace}
+
+
+
+\setstretch{1.2}
+\geometry{
+    textheight=9in,
+    textwidth=5.5in,
+    top=1in,
+    headheight=12pt,
+    headsep=25pt,
+    footskip=30pt
+}
+
+% ------------------------------------------------------------------------------
+
+\begin{document}
+
+% ------------------------------------------------------------------------------
+% Cover Page and ToC
+% ------------------------------------------------------------------------------
+
+\title{ \normalsize \textsc{}
+		\\ [2.0cm]
+		\HRule{1.5pt} \\
+		\LARGE \textbf{\uppercase{(Co)Completeness of Fibred Double Categories}
+		\HRule{2.0pt} \\ [0.6cm] \LARGE{PhD Writings} \vspace*{10\baselineskip}}
+		}
+\date{}
+\author{\textbf{Author} \\ 
+		Siyabonga Mthimkhulu \\
+		Muizenberg, Cape Town}
+
+\maketitle
+\newpage
+
+\tableofcontents
+\newpage
+
+% ------------------------------------------------------------------------------
+These are edited notes from \cite{TS} including proofs that are originally not found in the text. \\ They cover accordingly Internal Sums and Products.
+
+
+\section{Depend Sums and Products}
+
+Given a category $\mathcal{C}$ and a morphism morphism $f \colon X \mor Y$ in $\mathcal{C}$ s.t pullbacks along $f$ exist. We say
+
+\begin{definition}
+	A depend sum along $f$ is the functor $\sum_{f} \colon            \mathcal{C}/X \mor \mathcal{C}/Y$ that is left adjoint to the change-of-base functor $f^\ast \colon \mathcal{C}/Y \mor \mathcal{C}/X$ 
+	\[\xymatrix@=0.5cm{
+		\slice{X} \ar@/^1.5pc/[rrrr]^{\sum_f} &&\perp  && \slice{Y} \ar@/^1.5pc/[llll]^{f^\ast} 
+	}\]
+	
+\end{definition}
+
+Dually 
+
+\begin{definition}
+	A dependent product along $g \colon X \mor Y$ is, if it exists, the right adjoint functor $\prod_{g} \colon \slice{X} \mor \slice{Y}$ to the change-of-base along $g$. 
+	
+	\[\xymatrix@=0.5cm{
+		\slice{X} \ar@/^1.5pc/[rrrr]^{\prod_f} &&\top  && \slice{Y} \ar@/^1.5pc/[llll]^{g_\ast} 
+	}\]
+\end{definition}
+
+\begin{remark}
+	A category with dependent products necessarily has pullbacks. Thus we have 
+	
+	\begin{equation*}
+		\sum_f \adj f^\ast \adj \prod_f
+	\end{equation*}
+	
+\end{remark}
+
+
+\[\xymatrix@=1.5cm{
+	X \rtwocell^{f}_{g}{\eta} & B
+}
+\]
+
+
+\section{Opfibrations}
+Let $\fib$ be a functor. 
+
+\begin{enumerate}
+	\item  A morphism $\varphi \colon X \mor Y$ in $\mathcal{E}$ over $u \colon I \mor J$ is opcartesian if it is cartesian over $u$ for $P \colon \mathcal{E}^{op} \mor \mathcal{B}^{op}$. That is, if each morphism 
+	$\psi \colon X \mor Z$ with $P\psi = v \comp u$ in $\mathcal{B}$, uniquely determines a morphism $\theta \colon Y \mor Z$ over $v$. \\
+	
+	\item A functor $\fib$ is an opfibration if $\opfib$ is a fibration. Equivalently, if for each $u \colon I \mor J$ in $\mathcal{B}$, there is an opcartesian morphism $\varphi \colon X \mor Y$ over $u$. \\
+	
+	\item  A bifibration is a functor $\fib$ that is a fibration and an opfibration.
+\end{enumerate}
+
+\begin{remark}
+	Usually it is written $u^*X \mor X $ for a cartesian lifting of $u \colon I \mor J$. Similarly, it also written $X \mor u_{!}X$ or $X \mor \coprod_uX$ for opcartesian lifting of $u$. \\
+	
+	The assignment $X \mapsto u_{!}X$ extends to a functor which may be called an extension --- because it turns out to be left adjoint to $u$.
+\end{remark} 
+
+
+\begin{example}
+	The domain functor $\partial_0 \equiv \mbox{dom} \colon \mathcal{B}^2 \mor \mathcal{B}$ is an opfibration if and only if $\mathcal{B}$ has pushouts. Pushouts are precisely the opcartesian morphisms in $\mathcal{B}^2$. \\
+	The fibre over $I \in \mathcal{B}$ is the opslice $I/\mathcal{B}$. 
+\end{example}
+
+\begin{lemma}[B. Jacobs]
+	A fibration is a bifibratoin (\ie additionally it is an opfibration) if and only if each reindexing functor $u^*$ has a left adjoint, denoted $\coprod_u$. 
+\end{lemma}
+
+\begin{proof}
+	Let $\fib$ be a fibration. For a morphism $u \colon I \mor J$ in $\mathcal{B}$ and objects $X \in \mathcal{E}_I $ and $Y \in \mathcal{E}_J$ consider the following chain
+	\[
+	\mathcal{E}_J\left(\coprod_uX,Y\right) \overset{*}{\isom} \mathcal{E}_I(X, u^*Y) \isom \mathcal{E}_u(X,Y) \overset{**}{\isom} \mathcal{E}_J\left(\coprod_uX,Y\right)
+	\]
+	where $\isom$ is due to $P$ being a fibration. Then 
+	\begin{align*}
+		\mbox{left adjoints $\coprod_u$ exist} &\iff  \overset{*}{\isom} \mbox{ exist}\\
+												&\iff \overset{**}{\isom} \mbox{ exist} \\
+												&\iff P \mbox{ is an opfibrati
+													on.}
+	\end{align*}
+\end{proof}
+
+\begin{remark}
+	The Beck-Chevalley condition is not required for these $\coprod_u$'s in the above lemma. However, this result implies that every fibration with sums (\ie adjunctions $\coprod_u \adj u^*$ satisying Beck-Chevalley) is a bifibration. Thus, codomain fibrations are bifibrations.
+\end{remark}
+
+\section{Geometric Morphisms as Fibrations}
+
+\begin{theorem}
+	Given a functor $F \colon \mathcal{C} \mor \mathcal{D}$ with a fully faithful right adjoint $G$ s.t $F$ preserves finite limits and $\mathcal{C}$ is finitely complete, then $F$ is a Street fibration.
+\end{theorem}
+
+Before we prove the above theorem, we provide this lemma
+\begin{lemma}
+	If a functor $G \colon \mathcal{D} \mor \mathcal{C}$ has a left adjoint $F$ with counit $\varepsilon$. Then $G$ is fully faithful iff the $\varepsilon$ is an isomorphism.
+\end{lemma}  
+
+\begin{proof}\label{counit}
+	Consider
+	\[\xymatrix@=0.5cm{
+		\mbox{Hom}(X,X') \ar[rr]^{G} \ar[ddrr]_{\varepsilon_X}  && \mbox{Hom}(GX,GX')	\ar[dd]_{\thicksim}^{\mbox{ad}} \\
+		\\
+		&&\mbox{Hom}(FGX,X')
+	}
+	\]
+	then $\mbox{Hom}(X,X') \xlongrightarrow{\thicksim} \mbox{Hom}(GX,GX')$ iff $\varepsilon_X$ is a bijection. $G$ is then fully faithful iff $FGX \mor X$ is an isomorphism for all $X$. 
+\end{proof}
+
+We can now prove the theorem
+\begin{proof}
+	Given $Y$ in $\mathcal{C}$ with $F(Y) = J$ and a morphism $u \colon I \to J$, let $u^*Y$ be the pullback of the unit $\eta \colon Y \mor G(J) = GF(Y)$ along $G(u) \colon G(I) \mor G(J)$. Since $F(\eta_Z)$ is an isomorphism (as $G$ is fully faithful) and $F$ preserves pullbacks, $F$ also sends the morphism $u^*(Y) \mor G(I)$ to an isomorphism. As illustrated in the diagram below
+	
+	\[\xymatrix@=0.5cm{
+		u^*Y \ar[rr]^{\varphi} \ar[dd] && Y \ar[dd]^{\eta_Y} \\
+		\\
+		G(I) \ar[rr]_{G(u)} && G(J)
+	}
+	\]
+	Claim: $\varphi \colon u^*Y \mor Y$ is cartesian. \\
+	
+	Suppose $\psi \colon Z \mor Y$ is a morphism over $v \colon K \mor I$ and $\psi$ is over $u \comp v$. Then we have $Gu \comp Gv \comp \eta_Z = \eta_Y \comp \psi$ by the naturality of the adjunction unit. The universal property of the pullback gives a  unique morphism $\theta \colon Z \mor u^*Y$ over $v$. As shown below
+	
+	\[\xymatrix@=0.5cm{
+		Z \ar@{-->}[rr]^{\theta} \ar[dd]_{\eta_Z} \ar@/^1.5pc/[rrrr]^{\psi} && u^*Y \ar[rr]^{\phi} \ar[dd] && Y \ar[dd]^{\eta_Y} \\
+		\\
+		G(K) \ar[rr]_{G(v)} && G(I) \ar[rr]_{G(u)} && G(J) \\
+		\\
+		K \ar[rr]^{v} && I \ar[rr]^{u} && J
+	}
+	\]
+	Furthermore, for any other morphism $\tilde{\theta} \colon Z \mor u^*Y$ over $v$ that commutes with $\psi$ and $\varphi$, it must satisfy $G(v) \comp \eta_Z = \eta \comp \tilde{\theta}$, by the naturality of the adjunction it must equal $\theta$. 
+\end{proof}
+\section{Closure Properties of Fibrations}
+
+\begin{definition}\label{cartesian}
+	Let $P \colon X \mor Y$ be a functor. A morphism $f \colon x \mor y$ in $X$ is cartesian if given a morphism $h \colon z \mor y$ with $Ph = Pf \comp u$ where $u \colon v \mor Px$ there exists a unique morphism $g \colon z \mor x$ s.t $Pg = u$ and $f \comp g = h$. 
+\end{definition}
+
+\begin{definition}
+	A functor $P \colon X \mor Y$ is a fibration if for each $x \in X$ and a morphism $f \colon y \mor Px$ in $Y$ there is a cartesian morphism $f' \colon f^{*}x \mor x $ s.t $Pf' \isom f$.
+\end{definition}
+
+
+\begin{theorem}
+    Let $P \colon X \to B$ be a fibration and $F \colon Y \mor X $ be an arbitrary functor. Then $F$ itself is a fibration iff 
+    \begin{enumerate}
+    	\item  $Q \isom P \comp F$ is a fibration and $F$ is a cartesian functor from $Q$ to $P$ and 
+    	\item  Each $F_I \colon Y_I \mor X_I$ is a fibration and cartesian morphisms w.r.t these fibrations are stable under reindexing \ie, for every commutative square 
+  
+    	\[\xymatrix@=0.5cm{
+    		Y_1 \ar[rr]^{\varphi_1} \ar[dd]_{\theta} && X_1 \ar[dd]^{\psi} \\
+    		\\
+    		Y_2 \ar[rr]_{\varphi_2} && Y_1
+    		}\]
+    	in $Y$ with $\varphi_1$ and $\varphi_2$ cartesian w.r.t $Q$ over $u \colon J \mor I$ and $Q(\theta) = id_J$ and $Q(\psi) = id_I$ it holds that $\theta$ is cartesian w.r.t $F_J$ whenever $\psi$ is cartesian w.r.t $F_I$.
+  
+    	
+    \end{enumerate}
+\end{theorem}
+
+\begin{proof}
+	($\Longrightarrow$) Since fibration are closed under composition it follows that $Q \is P \comp F$ is a fibration. Consider a $Q-$cartesian morphism $\varphi \colon z \mor y$ over $P(f)$ where $f \colon x \mor Fy$ is $P-$cartesian. Then $PF(\varphi) \isom Q(\varphi) \isom P(f)$, we have two morphisms $F(\varphi)$ and $f$ both to $F(\varphi)$ over $P(f)$, it follows that $F(\varphi) \isom f$. To show $2$, let $y \in Y_I$ and $u \colon x \mor Fy$ in $X_I$. There is a $F-$cartesian morphism $w\colon e \mor e'$ in $Y$ with $F(w) \isom u$. It remains to show that $w \in Y_I$. Since $u \in X_I$ we have $P(w) \isom id_I$ and $PF(w) \isom P(u) \isom id \implies
+	w \in Y_I$.
+	\\
+	($\back$) Let $y \in Y_I$ lying over $x \in X$ ($x \isom F(y) $) and both $x$ and $y$ lie over $b \in B$ ($b \isom P(x) \isom Q(y)$) and morphisms $\delta \colon x' \mor x$ in $X$ and $\beta \colon b' \mor b$ in $B$. We are required to show: there is a cartesian morphism $y' \mor y$ lying over $\delta$. But since $Q$ is a fibration, there is a $Q-$cartesian morphism $\varphi \colon \beta^*y \mor y$ in $Y$ and $F-$cartesian implies that $F(\varphi) \colon \beta^*x \mor x$ is a $P-$cartesian morphism. \\
+	Notice that there is a unique factorization of $\delta$ through $F(\varphi)$
+	\begin{equation*}
+		x' \xlongrightarrow{\alpha} \beta^*x \xlongrightarrow{F(\varphi)} x
+	\end{equation*}
+	and $\alpha$ is a morphism in $b'$. Since $F_{b'}$ is a fibration, there is a $F_{b'}-$cartesian morphism $\psi \colon \alpha^*\beta^*y \mor \beta^*y$ in $Y_{b'}$. We must show that the composite
+	\begin{equation*}
+		\varphi \comp \psi \colon \alpha^*\beta^*y \mor \beta^*y \mor y
+	\end{equation*}
+	is cartesian over $\delta$. Consider the following diagram
+	% https://q.uiver.app/#q=WzAsMTMsWzAsMCwiTWFwc19ZKHknLCBcXGFscGhhXipcXGJldGFeKnkpIl0sWzIsMCwiTWFwc19ZKHknLCBcXGJldGFeKnkpIl0sWzQsMCwiTWFwc19ZKHknLCB5KSJdLFswLDIsIk1hcHNfWChGKHknKSwgeCcpIl0sWzIsMiwiTWFwc19YKEYoeScpLCBcXGJldGFeKngpIl0sWzQsMiwiTWFwc19YKEYoeScpLHgpIl0sWzAsNCwiTWFwc19CKFEoeScpLCBiJykiXSxbMiw0LCJNYXBzX0IoUSh5JyksIGInKSJdLFs0LDQsIk1hcHNfQihRKHknKSwgYikiXSxbMywxLCIoMikiXSxbMSwxLCIoMSkiXSxbMSwzLCIoMykiXSxbMywzLCIoMykiXSxbNiw3LCJpZCIsMl0sWzcsOF0sWzQsNV0sWzMsNF0sWzQsN10sWzMsNl0sWzUsOF0sWzIsNV0sWzEsNF0sWzAsM10sWzAsMV0sWzEsMl1d
+	\[\xymatrix@=0.5cm{
+		Maps_Y(y', \alpha^*\beta^*y) \ar[rr] \ar[dd] && Maps_Y(y', \beta^*y) \ar[rr] \ar[dd] && Maps_Y(y', y) \ar[dd] \\
+		& (1) && (2) \\
+		Maps_X(F(y'), x') \ar[rr] \ar[dd] && Maps_X(F(y'), \beta^*x) \ar[rr] \ar[dd] && Maps_X(F(y'),x) \ar[dd] \\
+		& (3) && (4) \\
+		Maps_B(Q(y'), b') \ar[rr]_{\mbox{id}} && Maps_B(Q(y'), b') \ar[rr] && Maps_B(Q(y'), b)
+	}\]
+	we must show that the composite of the two upper squares is cartesian. To do this, we shall show that both $(1)$ and $(2)$ are cartesian. By our construction $\varphi$ is $Q-$cartesian and $F\varphi)$ is $P-$cartesian, so the composite of $(2)$ and $(4)$ is cartesian and $(4)$ is cartesian, so $(2)$ must be cartesian. To prove that $(1)$ is cartesian, we know that a commutative square is cartesian iff the induced maps on the fibers are equivalences, it suffices to show that the square
+	% https://q.uiver.app/#q=WzAsNSxbMCwwLCJNYXBzX1koeScsIFxcYWxwaGFeKlxcYmV0YV4qeSlfayJdLFsyLDAsIk1hcHNfWSh5JywgXFxiZXRhXip5KV9rIl0sWzAsMiwiTWFwc19YKEYoeScpLCB4JylfayJdLFsyLDIsIk1hcHNfWChGKHknKSwgXFxiZXRhXip4KV9rIl0sWzQsMl0sWzIsM10sWzEsM10sWzAsMl0sWzAsMV1d
+	\[\xymatrix@=0.5cm{
+		Maps_Y(y', \alpha^*\beta^*y)_k \ar[rr] \ar[dd] && Maps_Y(y', \beta^*y)_k \ar[dd] \\
+		\\
+		Maps_X(F(y'), x')_k \ar[rr] && Maps_X(F(y'), \beta^*x)_k
+	}\]
+	obtained by taking the fiber at $k \colon Q(y') \mor b'$ is cartesian for all maps $k$. Taking $P-$ and $Q-$cartesian pullbacks along $k$ we can (since $F$ is cartesian functor) identify such a square with the following square
+	% https://q.uiver.app/#q=WzAsNSxbMCwwLCJNYXBzX3tZX3tRKHknKX19KHknLCBrXipcXGFscGhhXipcXGJldGFeKnkpIl0sWzIsMCwiTWFwc197WV97USh5Jyl9fSh5Jywga14qXFxiZXRhXip5KSJdLFswLDIsIk1hcHNfe1hfe1EoeScpfX0oRih5JyksIGteKngnKSJdLFsyLDIsIk1hcHNfe1hfe1EoeScpfX0oRih5JyksIGteKlxcYmV0YV4qeCkiXSxbNCwyXSxbMiwzXSxbMSwzXSxbMCwyXSxbMCwxXV0=
+	\[\xymatrix@=0.5cm{
+		Maps_{Y_{Q(y')}}(y', k^*\alpha^*\beta^*y) \ar[rr] \ar[dd] && Maps_{Y_{Q(y')}}(y', k^*\beta^*y) \ar[dd] \\
+		\\
+		Maps_{X_{Q(y')}}(F(y'), k^*x') \ar[rr] && Maps_{X_{Q(y')}}(F(y'), k^*\beta^*x)
+	}\]
+	But this is cartesian since by our assumption the map 
+	\begin{equation*}
+		k^*\alpha^*\beta^*y \mor k^*\beta^*y
+	\end{equation*}
+	is $F_{Q(y')}-$cartesian (because  $\psi \colon \alpha^*\beta^*y \mor \beta^*y$ is $F_{b'}-$cartesian).
+\end{proof}
+
+\section{Internal Sums}
+
+\begin{definition}\label{Def1}
+	Let $\mathcal{B}$ be a category with pullbacks and $P \colon \mathcal{X} \mor \mathcal{B}$ a fibration. A morphism $\varphi \colon X \mor Y$ over $u \colon I \mor J$ is called cocartesian iff for every $v \colon J \mor K$ in $\mathcal{B}$ and $\psi \colon X \mor Z$ over $ v \comp u$ there is a unique morphism $\theta \colon Y \mor Z$ over $v$ with $\psi = \theta \comp \varphi$.
+	
+	% https://q.uiver.app/#q=WzAsOCxbMiwwLCJYIl0sWzQsMCwiWSJdLFsyLDIsIkkiXSxbNCwyLCJKIl0sWzAsMCwiXFxtYXRoY2Fse1h9Il0sWzAsMiwiXFxtYXRoY2Fse0J9Il0sWzYsMiwiSyJdLFs2LDAsIloiXSxbMCwxLCJcXHZhcnBoaSJdLFsyLDMsInUiLDJdLFs0LDUsIlAiLDJdLFszLDYsInYiLDJdLFswLDcsIlxccHNpIiwwLHsiY3VydmUiOi0zfV0sWzEsNywiXFx0aGV0YSIsMCx7InN0eWxlIjp7ImJvZHkiOnsibmFtZSI6ImRhc2hlZCJ9fX1dXQ==
+	\[\xymatrix@=0.5cm{
+		X \ar[dd]_{\varphi} \ar[rrdd]^{\psi} &&&& I \ar[dd]_{u} \ar[ddrr] \\
+		\\
+		Y \ar@{-->}[rr]_{\theta} && Z && J \ar[rr]_{v} && K
+	}\] 
+	
+	The fibration $P$ has internal sums iff the following conditions are satisfied.
+	
+	\begin{enumerate}
+		\item For every $X \in P(I)$ and $u \colon I \mor J$ in $\mathcal{B}$ there is a cocartesian morphism $\varphi \colon X \mor Y$over $u$. \\
+		\item The Beck-Chevalley Condition (BCC) holds \ie, for every commuting square in $\mathcal{X}$
+		% https://q.uiver.app/#q=WzAsNCxbMCwwLCJDIl0sWzIsMCwiRCJdLFswLDIsIkEiXSxbMiwyLCJCIl0sWzAsMSwiXFx0aWxkZXtcXHZhcnBoaX0iXSxbMSwzLCJcXHBzaSJdLFswLDIsIlxcdGlsZGV7XFxwc2l9IiwyXSxbMiwzLCJcXHZhcnBoaSIsMl1d
+		\[\xymatrix@=0.5cm{
+			C \ar[rr]^{\tilde{\varphi}} \ar[dd]_{\tilde{\psi}} && D \ar[dd]^{\psi} \\
+			\\
+			A \ar[rr]_{\varphi} && B
+		}\]
+		
+		over a pullback in $\mathcal{B}$, it holds that $\tilde{\varphi}$ is cocartesian whenever $\varphi$ is cocartesian and $\psi$ and $\tilde{\psi}$ are cartesian.
+	\end{enumerate}
+\end{definition}
+
+\begin{remark}\label{BCC rem}
+	\begin{enumerate}
+		\item It is easily seen that for a fibration $\fib$ a morphism $\varphi \colon X \mor Y$ is cocartesian iff for all $\psi \colon X \to Z$ over $P(\varphi)$ there exists a unique vertical morphism $\alpha \colon Y \to Z$ with $\alpha \comp \varphi = \psi$ .
+		
+		\item One easily sees that the BCC of Definition \ref{Def1} is equivalent to the requirement that for every commuting square in $\mathcal{E}$ 
+		% https://q.uiver.app/#q=WzAsNCxbMCwwLCJDIl0sWzIsMCwiRCJdLFswLDIsIkEiXSxbMiwyLCJCIl0sWzIsMywiXFx2YXJwaGkiLDJdLFswLDIsIlxcdGlsZGV7XFxwc2l9IiwyXSxbMSwzLCJcXHBzaSJdLFswLDEsIlxcdGlsZGV7XFx2YXJwaGl9Il1d
+		\[\xymatrix@=0.5cm{
+			C \ar[rr]^{\tilde{\varphi}} \ar[dd]_{\tilde{\psi}} && D \ar[dd]^{\psi} \\
+			\\
+			A \ar[rr]_{\varphi} && B
+		}\]
+		over a pullback in $\mathcal{B}$ it holds that $\psi$ is cartesian whenever $\tilde{\psi}$ is and $\varphi$ and $\tilde{\varphi}$ are cocartesian.
+	\end{enumerate}
+\end{remark}
+
+We now give an explanation for internal sums in which the Beck-Chevalley Condition arises in a less special way. To this end, we generalize the Fam construction from ordinary categories to fibrations.
+
+\begin{definition}
+	Let $\mathcal{B}$ be a category with pullbacks and $\fib$ be a fibration. Then the family fibration $Fam(P)$ for $P$ is defined as $P_{\mathcal{B}} \comp \partial_0^*P$ where
+	
+	% https://q.uiver.app/#q=WzAsNCxbMCwwLCJQXFxkb3duYXJyb3dcXG1hdGhjYWx7Qn0gIl0sWzIsMCwiXFxtYXRoY2Fse0V9Il0sWzIsMiwiXFxtYXRoY2Fse0J9Il0sWzAsMiwiXFxtYXRoY2Fse0J9XjIiXSxbMCwxXSxbMSwyLCJQIl0sWzMsMiwiXFxwYXJ0aWFsXzAiLDJdLFswLDMsIkZhbShQKSIsMl1d
+	\[\xymatrix@=0.5cm{
+		{P \downarrow \mathcal{B}} \ar@/_2.5pc/[dddd]_{Fam(P)} \ar[rr] \ar[dd]_{\partial_0^*P} \pullbackcorner && {\mathcal{E}} \ar[dd]^{P} \\
+		&
+		\\
+		{\mathcal{B}^2} \ar[dd]_{P_{\mathcal{B}}} \ar[rr]_{\partial_0} && {\mathcal{B}} \\
+		\\
+		\mathcal{B}		
+	}\]
+	is a pullback. The cartesian functor $Fam(P) \colon \partial_0^*P \mor P_{\mathcal{B}}$ is called the fibred family fibration for $P$.
+	
+	% https://q.uiver.app/#q=WzAsMyxbMCwwLCJQXFxkb3duYXJyb3dcXG1hdGhjYWx7Qn0gIl0sWzIsMCwiXFxtYXRoY2Fse0J9Il0sWzEsMSwiXFxtYXRoY2Fse0J9XjIiXSxbMCwxLCJcXGlvdGFfUCJdLFswLDIsIkZhbShQKSIsMl0sWzIsMSwiUF97XFxtYXRoY2Fse0J9fSIsMl1d
+%	\[\xymatrix@=0.5cm{
+%		{P \downarrow \mathcal{B}} \ar[rr]^{\iota_P} \ar[dr]_{Fam(P)} && {\mathcal{B}} \\
+%		& {\mathcal{B}^2} \ar[ur]_{P_{\mathcal{B}}}
+%	}\]
+	We can define the cartesian functor $\eta_P \colon P \mor Fam(P)$ as in the diagram 
+	
+	% https://q.uiver.app/#q=WzAsOSxbMiwyLCJQXFxkb3duYXJyb3dcXG1hdGhjYWx7Qn0gIl0sWzQsMiwiXFxtYXRoY2Fse0V9Il0sWzMsMl0sWzQsNCwiXFxtYXRoY2Fse0J9Il0sWzIsNCwiXFxtYXRoY2Fse0J9XjIiXSxbMiw2LCJcXG1hdGhjYWx7Qn1eMiJdLFswLDQsIlxcbWF0aGNhbHtCfSJdLFswLDAsIlxcbWF0aGNhbHtFfSJdLFsyLDVdLFswLDFdLFsxLDMsIlAiXSxbNCwzLCJcXHBhcnRpYWxfMCIsMl0sWzAsNCwiRmFtKFApIiwyXSxbNCw1LCJQX3tcXG1hdGhjYWx7Qn19Il0sWzYsNCwiXFxEZWx0YV97XFxtYXRoY2Fse0J9fSIsMl0sWzYsNSwiIiwyLHsic3R5bGUiOnsiaGVhZCI6eyJuYW1lIjoibm9uZSJ9fX1dLFs2LDUsIiIsMix7Im9mZnNldCI6LTEsInN0eWxlIjp7ImhlYWQiOnsibmFtZSI6Im5vbmUifX19XSxbNywxLCIiLDIseyJzdHlsZSI6eyJoZWFkIjp7Im5hbWUiOiJub25lIn19fV0sWzcsMSwiIiwyLHsib2Zmc2V0IjotMSwic3R5bGUiOnsiaGVhZCI6eyJuYW1lIjoibm9uZSJ9fX1dLFs3LDYsIlAiLDJdLFs3LDAsIlxcZXRhX1AiLDIseyJzdHlsZSI6eyJib2R5Ijp7Im5hbWUiOiJkYXNoZWQifX19XV0=
+	\[\xymatrix@=0.5cm{
+		{\mathcal{E}} \ar[dddd]_{P} \ar@{-->}[ddrr]_{\eta_P} \ar@{-}[ddrrrr]  \ar@<0.5ex>@{-}[ddrrrr] \\
+		\\
+		&& {P\downarrow\mathcal{B}} \ar[rr] \ar[dd]_{\partial_0^*P} \pullbackcorner && {\mathcal{E}} \ar[dd]^{P} \\
+		\\
+		{\mathcal{B}} \ar@{-}[ddrr] \ar@<0.5ex>@{-}[ddrr] \ar[rr]_{\Delta_{\mathcal{B}}}   && {\mathcal{B}^2} \ar[rr]_{\partial_0} \ar[dd]_{P_{\mathcal{B}}} && {\mathcal{B}} \\
+		\\
+		&& {\mathcal{B}}
+	}\]
+	
+	where $\Delta_{\mathcal{B}}$ sends a morphism $u \colon I \mor J$ in $\mathcal{E}$ to
+	
+	% https://q.uiver.app/#q=WzAsNCxbMCwwLCJJIl0sWzIsMCwiSiJdLFswLDIsIkkiXSxbMiwyLCJKIl0sWzAsMSwidSJdLFswLDIsIiIsMCx7Im9mZnNldCI6LTEsInN0eWxlIjp7ImhlYWQiOnsibmFtZSI6Im5vbmUifX19XSxbMiwzLCJ1IiwyXSxbMCwyLCIiLDIseyJzdHlsZSI6eyJoZWFkIjp7Im5hbWUiOiJub25lIn19fV0sWzEsMywiIiwwLHsib2Zmc2V0IjoxLCJzdHlsZSI6eyJoZWFkIjp7Im5hbWUiOiJub25lIn19fV0sWzEsMywiIiwxLHsic3R5bGUiOnsiaGVhZCI6eyJuYW1lIjoibm9uZSJ9fX1dXQ==
+	\[\xymatrix@=0.5cm{
+		I \ar[rr]^{u} \ar@{-}[dd] \ar@<0.5ex>@{-}[dd] && J \ar@{-}[dd] \ar@<-0.5ex>@{-}[dd] \\
+		\\
+		I \ar[rr]_{u} && J
+	}\]
+	in $\mathcal{B}^2$. More explicitly, $\eta_P$ sends $\varphi \colon X \mor Y$ over $u \colon I \mor J$ to a pair
+	
+	% https://q.uiver.app/#q=WzAsNixbMCwxLCJJIl0sWzIsMSwiSiJdLFswLDMsIkkiXSxbMiwzLCJKIl0sWzAsMCwiWCJdLFsyLDAsIlkiXSxbMCwxLCJ1Il0sWzAsMiwiIiwwLHsib2Zmc2V0IjotMSwic3R5bGUiOnsiaGVhZCI6eyJuYW1lIjoibm9uZSJ9fX1dLFsyLDMsInUiLDJdLFswLDIsIiIsMix7InN0eWxlIjp7ImhlYWQiOnsibmFtZSI6Im5vbmUifX19XSxbMSwzLCIiLDAseyJvZmZzZXQiOjEsInN0eWxlIjp7ImhlYWQiOnsibmFtZSI6Im5vbmUifX19XSxbMSwzLCIiLDEseyJzdHlsZSI6eyJoZWFkIjp7Im5hbWUiOiJub25lIn19fV0sWzQsNSwiXFx2YXJwaGkiXV0=
+	\[\xymatrix@=0.5cm{
+		X \ar[rr]^{\varphi} && Y \\
+		I \ar[rr]^{u} \ar@{-}[dd] \ar@<0.5ex>@{-}[dd] && J \ar@{-}[dd] \ar@<-0.5ex>@{-}[dd] \\
+		\\
+		I \ar[rr]_{u} && J
+	}\]
+	in $P\downarrow\mathcal{B}$. Clearly the functor $\eta_P$ preserves the cartesianness of morphisms \ie, $\eta_P$ is cartesian. \vfill
+\end{definition}
+
+\begin{remark}
+	If a morphism $Fam(P)(\varphi)$ is $P_{\mathcal{B}}$-cocartesian the $\varphi$ is $Fam(P)$-cartesian iff $\varphi$ is $Fam(P)$-cocartesian. Moreover, for every morphism 
+	% https://q.uiver.app/#q=WzAsNCxbMCwwLCJBIl0sWzIsMCwiQiJdLFswLDIsIkkiXSxbMiwyLCJKIl0sWzAsMSwidiJdLFswLDIsImEiLDJdLFsyLDMsInUiLDJdLFsxLDMsImIiXV0=
+	\[\xymatrix@=0.5cm{
+		A \ar[rr]^{v} \ar[dd]_{a} && B \ar[dd]^{b} \\
+		\\
+		I \ar[rr]_{u} && J
+	}\]
+	in $\mathcal{B}^2$ we have 
+
+	\[\xymatrix@=0.5cm{
+		A \ar@{-}[dd] \ar@<-0.5ex>@{-}[dd] \ar[rr]^v && B \ar@{-}[rr] \ar@<0.5ex>@{-}[rr] \ar@{-}[dd] \ar@<0.5ex>@{-}[dd] && B \ar[dd]^b && A \ar@{-}[dd] \ar@<0.5ex>@{-}[dd] \ar@{-}[rr] \ar@<0.5ex>@{-}[rr]  && A \ar[dd]^a \ar[rr]^v && B \ar[dd]^b \\ &
+		1_v && \varphi_b && = && \varphi_a
+		\\
+		A \ar[rr]_v && B \ar[rr]_b && J && A \ar[rr]_a && I \ar[rr]_u && J
+	}\]
+	
+	where $\varphi_a$ and $\varphi_b$ are $P_{\mathcal{B}}$-cocartesian. From these two observations, one can show that for fibrations $P$ and $Q$ over $\mathcal{B}$ a cartesian functor $F \colon Fam(P) \mor Fam(Q)$ is determined uniquely up to isomorphism by its restriction along the inclusion functor $\Delta_{\mathcal{B}}$ from which it follows that $F \isom Fam({\Delta_B }^*F)$. Thus up to isomorphism all cartesian functors from $Fam(P)$ to $Fam(Q)$ are of the form $Fam(F)$ for some cartesian functor $F \colon P \mor Q$.
+
+\end{remark}
+
+Next we characterize the property of having internal sums in terms of the family monad Fam. \footnote{One can show that $\eta$ and $\mu$ are natural transformations giving rise to a monad (Fam, $\eta$, $\mu$) on \textbf{Fib($\mathcal{B}$)}}.
+
+\begin{theorem}
+	Let $\mathcal{B}$ be a category with pullbacks and $\fib$ be a fibration. Then $P$ has internal sums iff $\eta_P \colon P \mor Fam(P)$ has a fibred left adjoint $\coprod_P \colon Fam(P) \mor P$ \ie, $\coprod \dashv \eta_P$ where $\coprod_P$ is cartesian and unit and counit of the adjunction are cartesian natural transformations.
+\end{theorem}
+
+\begin{proof}
+	($\Longleftarrow$)
+	We explicitate the universal property of the unit of the adjunction $\coprod_P \dashv \eta_P$ at an object $(u,X)$ in the following diagram
+	% https://q.uiver.app/#q=WzAsOSxbMCwwLCJYIl0sWzIsMCwiWSJdLFs0LDAsIloiXSxbMCwyLCJJIl0sWzIsMiwiSiJdLFs0LDIsIksiXSxbMCw0LCJKIl0sWzIsNCwiSiJdLFs0LDQsIksiXSxbMCwxLCJcXGV0YV97KHUsWCl9Il0sWzMsNCwidSJdLFs0LDUsInYiXSxbMCwyLCJcXHBzaSIsMCx7ImN1cnZlIjotM31dLFsxLDIsIlxcdGhldGEiLDAseyJzdHlsZSI6eyJib2R5Ijp7Im5hbWUiOiJkYXNoZWQifX19XSxbMyw2LCJ1IiwyXSxbNiw3LCIiLDIseyJzdHlsZSI6eyJoZWFkIjp7Im5hbWUiOiJub25lIn19fV0sWzYsNywiIiwyLHsib2Zmc2V0IjotMSwic3R5bGUiOnsiaGVhZCI6eyJuYW1lIjoibm9uZSJ9fX1dLFs0LDcsIiIsMix7InN0eWxlIjp7ImhlYWQiOnsibmFtZSI6Im5vbmUifX19XSxbNCw3LCIiLDIseyJvZmZzZXQiOjEsInN0eWxlIjp7ImhlYWQiOnsibmFtZSI6Im5vbmUifX19XSxbNyw4LCJ2IiwyXSxbNSw4LCIiLDAseyJzdHlsZSI6eyJoZWFkIjp7Im5hbWUiOiJub25lIn19fV0sWzUsOCwiIiwxLHsib2Zmc2V0IjoxLCJzdHlsZSI6eyJoZWFkIjp7Im5hbWUiOiJub25lIn19fV0sWzIsNSwiIiwxLHsic3R5bGUiOnsiYm9keSI6eyJuYW1lIjoiZG90dGVkIn0sImhlYWQiOnsibmFtZSI6Im5vbmUifX19XSxbMSw0LCIiLDEseyJzdHlsZSI6eyJib2R5Ijp7Im5hbWUiOiJkb3R0ZWQifSwiaGVhZCI6eyJuYW1lIjoibm9uZSJ9fX1dLFswLDMsIiIsMSx7InN0eWxlIjp7ImJvZHkiOnsibmFtZSI6ImRvdHRlZCJ9LCJoZWFkIjp7Im5hbWUiOiJub25lIn19fV1d
+	\[\xymatrix@=0.5cm{
+		X \ar[rr]_{\eta_{(u,X)}} \ar@{.}[dd] \ar@/^1pc/[rrrr]^\psi && Y \ar[rr]_{\theta} \ar@{.}[dd] && Z \ar@{.}[dd]  \\
+		\\
+		I \ar[rr]^{u} \ar[dd]_{u} && J \ar[rr]^{v} \ar@{-}[dd] \ar@<0.5ex>@{-}[dd]  && K \ar@{-}[dd] \ar@<0.5ex>@{-}[dd]  \\
+		\\
+		J \ar@{-}[rr] \ar@<0.5ex>@{-}[rr] && J \ar[rr]_{v} && K
+	}\]
+	
+	whose left column is the unit of the adjunction at $(u,X)$. From this it follows that $\eta_{(u,X)} \colon X \mor Y$ is cocartesian over $u$. Cartesianness of $\coprod_P$ says that the cartesian arrow $f$ as given by 
+	
+	% https://q.uiver.app/#q=WzAsNyxbMCwwLCJYIl0sWzIsMCwiWSJdLFswLDEsIksiXSxbMiwxLCJMIl0sWzAsMywiSSJdLFsyLDMsIkoiXSxbMSwyLCJcXExBUkdFe1xcbHJjb3JuZXJ9Il0sWzAsMSwiXFxwc2kiXSxbMyw1LCJ2Il0sWzQsNSwidSIsMl0sWzIsNCwicCIsMl0sWzIsMywicSJdLFswLDEsIlxcdGV4dHtjYXJ0fSIsMl1d
+	\[	\xymatrix@=0.5cm{
+		X \ar[rr]_{\mbox{cart}}^\psi && Y \\ 
+		K \ar[rr]^{q} \ar[dd]_p  \pullbackcorner &&L \ar[dd]^{v} \\
+		&
+		\\
+		I \ar[rr]_{u} && J
+ 	}\]
+ 	
+
+ 	
+	in $P \downarrow \mathcal{B}$ is sent by $\coprod_P$ to the cartesian arrow $\coprod_Pf$ over $u$ satisfying 
+	
+	\[ \xymatrix@=0.5cm{
+		X \ar[rr]_{\mbox{cart}}^\psi \ar[dd]_{\eta_{(u,X)}} && Y \ar[dd]^{\eta_{(v,Y)}} \\
+		\\
+		A \ar[rr]_{\coprod_Pf}^{\mbox{cart}} && B
+	}
+	\]
+	where $\eta_{(u,X)}$ and $\eta_{(v,Y)}$  are cocartesian units of the adjunction above $p$ and $v$ respectively. Thus, by $(2)$ of Remark \ref{BCC rem} cartesianness of $\coprod_P$ is just the Beck-Chevalley Condition for internal sums.
+	
+	$(\Longrightarrow)$ If $P$ has internal sums then the functor $\coprod_P$ left adjoint to $P$ is given by sending a morphism $f$ in $P\downarrow \mathcal{B}$ as given by
+	
+	\[\xymatrix@=0.5cm{
+		X \ar[rr]^{\psi} && Y \\
+		K \ar[rr]^{q} \ar[dd]_{p} && L \ar[dd]^{v} \\
+		\\
+		I \ar[rr]_{u} && J
+	}
+	\]
+	
+	to the morphism $\coprod_Pf$ over $u$ satisfying
+	\[\xymatrix@=0.5cm{
+		X \ar[rr]^{\psi} \ar[dd]_{\varphi_1} && Y \ar[dd]^{\varphi_2} \\
+		\\
+		A \ar[rr]_{\coprod_Pf} && B
+	}\]
+	where $\varphi_1$ and $\varphi_2$ are cocartesian over $p$ and $v$ respectively. One can verify that indeed $\coprod_P$ is left adjoint to $\eta_P$ using the units of the adjunction the cocartesian liftings guaranteed for $P$. Again, cartesianness of $\coprod_P$ is easily seen to be equivalent to the Beck-Chevalley Condition.
+
+\end{proof}
+
+The next chapter discusses the dual of internal sums.
+
+\section{Internal Products}
+\begin{definition}
+    Let $\mathcal{B}$ be a category with pullbacks. A fibration $P \colon \mathcal{X} \mor \mathcal{B}$ has internal products if the following hold:
+    \begin{enumerate}
+    	\item For $u \colon I \mor J$ in $\mathcal{B}$ and $X \in P(I)$ 
+    	
+    	\[\xymatrix@=0.5cm{
+    		&& u^{*}Z \ar[rr]_{\mbox{cart}}^{\theta} \ar[ddll]_{\alpha}  \ar[dd]^{u^{*}\beta} && Z \ar@{-->}[dd]^{\beta} \\
+    		\\
+    		X && u^{*}E \ar[ll]^{\varepsilon} \ar[rr]^{\mbox{cart}}_{\varphi}  && E
+    	}\]
+    	The span $(\varphi, \varepsilon)$ is the determined uniquely up to vertical isomorphism. It is called an evaluation span for $X$ along $u$. \\
+    	
+    	\item Whenever the pullback
+    	
+    	\[\xymatrix@=0.5cm{
+    		L \ar[rr]^{\tilde{v}} \ar[dd]_{\tilde{u}} \mathlarger{\pullbackcorner} && L \ar[dd]^{u}  \\
+    		&
+    		\\
+    		K \ar[rr]_{v} && J
+    	}\]
+    	
+    	in $\mathcal{B}$ and $(\varphi,\varepsilon)$ is an evaluation span for $X$ along $u$ then 
+   
+    	with the lower square above the pullback in $\mathcal{B}$, $\tilde{\varepsilon}$ vertical, then ($\tilde{\varphi}, \tilde{\varepsilon}$) is an evaluation span for $\tilde{v}^*X$ along $v$.
+    	
+    	\[\xymatrix@=0.5cm{
+    		\tilde{v}^*Z \ar[rr]_{\mbox{cart}}^{\psi}  && X  \\
+    		\\
+    		\tilde{u}^*E \ar[rr]_{\mbox{cart}}^{\tilde{\theta}} \ar[uu]^{\tilde{\varepsilon}} \ar[dd]_{\tilde{\varphi}} && u^*E \ar[dd]^{\varphi} \ar[uu]_{u} \\
+    		\\
+    		\tilde{E} \ar[rr]_{\theta}^{\mbox{cart}} && E
+    	}
+    	\] 
+    	
+    \end{enumerate}
+\end{definition}
+
+\begin{remark}
+	Condition $(2)$ is called the Beck-Chevalley Condition for internal products and essentially says that evaluation spans are stable under reindexing.
+\end{remark}
+
+We now give a characterization of internal sums and products in terms of adjunctions from $\S1$ in \cite{JacobsCLTT}.
+
+\begin{lemma}
+	Let $\mathcal{B}$ be a category with pullbacks and $\fib$ be a fibration. We say $P$ has internal products (resp. sums) iff the following are satisfied 
+	\begin{enumerate}
+		\item for every morphism $u \colon I \mor J$ in $\mathcal{B}$, the change of base functor $u^* \colon \mathcal{E}_J \mor \mathcal{E}_I$ has a right adjoint (resp. left adjoint). \\
+		
+		\item The Beck-Chevalley Condition holds: For every pullback in $\mathcal{B}$ of the form 
+		\[\xymatrix@=0.5cm{
+			K \ar[rr]^{v} \ar[dd]_{r} \pullbackcorner && L \ar[dd]^{s} \\
+			&
+			\\
+			I \ar[rr]_{u} && J
+		}
+		\]
+		the canonical natural transformation \[
+		s^* \prod_u \Longrightarrow \prod_v r^* \qquad \left(\mbox{resp. }  \coprod_{v} r^* \Longrightarrow s^* \coprod_u \right)\] 
+		is an isomorphism.
+	\end{enumerate}
+\end{lemma}
+
+\section{Fibred Terminal Objects}
+
+\begin{definition}
+	A fibration $\fib$ is a fibration of categories with terminal object if and only if every fibre $P(I)$ has a terminal object and these are stable reindexing.
+\end{definition}
+
+\begin{lemma}\label{terminals}
+	Let $\cat{B}$ have a terminal object (besides having pullbacks). A fibration $\fib$ is a fibration of categories with terminal objects if and only if $\cat{E}$ has a terminal $1_{\cat{E}}$ and $P(1_{\cat{E}})$ is terminal in $\cat{B}$ .
+\end{lemma}
+
+\begin{proof}
+	Suppose $\fib$ is a fibration of categories with terminal objects. Let $1_{\cat{E}}$ be a fibred terminal over $1_\cat{B}$ and $u \colon I \mor 1_\cat{B}$. Let $\bar{u}(1_{\cat{E}}) \colon u^*1_{\cat{E}} \mor 1_{\cat{E}}$ be the cartesian lift of $u$. Then $u^*1_{\cat{E}}$ is a terminal in $P(I)$ and for any $i \in P(I)$ there is a unique vertical arrow $h \colon i \mor u^*1_{\cat{E}}$ with $\bar{u} \comp h$ over $u$. We must show that $1_\cat{E}$ is terminal in $\cat{E}$. Suppose $f \colon i \mor 1_{\cat{E}}$ is another morphism. Then by the universal property of cartesian morphisms, $f = \bar{u} \comp h$. Thus $\bar{u} \comp h$ is the unique arrow from $i$ to $1_{\cat{E}}$. Conversely, suppose $1_{\cat{E}}$ is terminal in $\cat{E}$ with $P(1_\cat{E})$ terminal in $\cat{B}$. Let $u \colon I \mor 1_\cat{B}$ the unique morphism in $\cat{B}$ and $\bar{u}(1_{\cat{E}}) \colon u^*1_{\cat{E}} \mor 1_{\cat{E}}$ be the cartesian lift of $u$. We must show that $u^*1_{\cat{E}}$ is terminal in $P(I)$. To this end, let $a \in P(I)$ and $g \colon a \mor 1_{\cat{E}}$ be the unique morphism in $\cat{E}$. Since $\bar{u}$ is cartesian, there is a unique vertical morphism $l \colon a \mor u^*1_{\cat{E}}$ such that $\bar{u} \comp l  = g$. For any $l^\prime$ with $\bar{u} \comp l^\prime = g$ it follows that $l = l^\prime$ since $1_\cat{E}$ is terminal. This shows that $u^*1_{\cat{E}}$ is terminal in $P(I)$.
+\end{proof}
+Let $P \colon \cat{E} \mor \cat{B}$ be a fibration. In the category $\slicec{\cat{B}}$, $P$ has a terminal object if $P$ 
+\begin{equation*}
+	\xymatrix{
+		\cat{E} \ar[rr]^{P} \ar[dr]_{P} && \cat{B} \ar[dl]^{id} \\
+		& \cat{B}
+	}
+\end{equation*}
+has a right-adjoint. As illustrated below.
+
+\begin{equation*}
+	\xymatrix{
+		\cat{E} \ar[dr]_{P} && \cat{B} \lltwocell_{P}^{T_I}{'\perp}  \ar[dl]^{id} \\
+		& \cat{B}
+	}
+\end{equation*}
+
+This fibrewise terminal $T_I$ is preserved by cartesianness.
+
+\vspace*{0.2in}
+In $\mathbf{Fib}$, $P$ has a terminal object if 
+
+\begin{equation*}
+	\xymatrix{
+		\cat{E} \ar[d]_{P} \ar[r]^{!} & 1  \ar[d]^{id} \\
+		\cat{B} \ar[r]_{!} & 1
+	}
+\end{equation*}
+has a right-adjoint in $\mathbf{Fib}$
+\begin{equation*}
+	\xymatrix{
+		\cat{E} \ar[d]_{P} && 1 \lltwocell_{!}^{T_\cat{E}}{'\perp} \ar[d]^{id}\\
+		\cat{B}  && 1 \lltwocell_{!}^{T_\cat{B}}{'\perp} 
+	}
+\end{equation*}
+\ie, both $\cat{E}$ and $\cat{B}$ have terminal objects and $P$ preserves them.
+
+\begin{theorem}
+	If $\cat{B}$ has a terminal object, then the following are equivalent
+	\begin{enumerate}
+		\item $P$ has a terminal object in $\slicec{B}$\\
+		\item $P$ has a terminal object in $\mathbf{Fib}$.
+	\end{enumerate}
+\end{theorem}
+
+\begin{proof}
+	By the lifting-and-factorization of adjoints 
+	\begin{equation*}
+		\xymatrix{
+			\cat{E} \ar[drr]_{P} \ar@/^1.5pc/[rrrr]^{!_{\cat{E}}} \ar[rr]^{P} && \cat{B} \ar[d]^{id} \ar[rr]^{!_{\cat{B}}} && 1 \ar[d]^{id} \\
+			&& \cat{B} \ar[rr]_{!_{\cat{B}}} && 1
+		}
+	\end{equation*}
+	Given that $!_{\cat{B}} \adj T_\cat{B}$
+	\begin{enumerate}[i.]
+		\item $P$ has a right-adjoint, $P \adj T_{\cat{E}}$,
+		\item $!_{\cat{E}}$ has a right-adjoint $!_{\cat{E}} \adj T_\cat{E}$ over $!_{\cat{B}} \adj T_{\cat{B}}$
+	\end{enumerate}
+\end{proof}
+
+\section{Fibred Pullbacks}
+Let $\cat{B}$ be a category with pullbacks. 
+\begin{lemma}
+	For a fibration $\fib$ we have
+	\begin{enumerate}
+		\item A commuting square of cartesian arrows is always a pullback in $\cat{E}$
+		\item A commuting square
+		\begin{equation*}
+			\xymatrix{
+				Y_1 \ar[d]_{\beta} \ar[r]^{\varphi_1}_{\text{cart}} & X_1 \ar[d]^{\alpha} \\
+				Y_2 \ar[r]_{\varphi_2}^{\text{cart}} & X_2
+			}
+		\end{equation*}
+		in $\cat{E}$ with $\alpha$ and $\beta$ vertical and $\varphi_i$ cartesian is always a pullback.
+	\end{enumerate}
+\end{lemma}
+
+\begin{proof}(2)
+	Consider a cone 
+	\[\xymatrix{
+		Q \ar[r] \ar[d] & X_1 \ar[d] \\
+		Y_2 \ar[r] & X_2
+	}\]
+	over the cospan $\cospan{Y_2}{X_2}{X_1}{}{}$, then its image is 
+	\[\xymatrix{
+		P(Q) \ar[dr] \ar[d] \\
+		P(Y_2) \ar[r]_{P(\varphi_2)} & P(X_2)
+	}\]
+	since $P(\varphi_1) = P(\varphi_2)$, another lift is given by 
+	\[\xymatrix{
+		Q \ar[dr] \ar@{-->}[d] \\
+		Y_1 \ar[r]_{\varphi_1} & X_1
+	}\]
+	then there exists a unique $Q\mor Y_1$ since $\varphi_1$ is cartesian. But we have two \emph{cartesian fillers}, namely, $Q \mor Y_2$ and the $Q \mor Y_1 \mor Y_2$ over 
+	\[\xymatrix{
+		P(Q) \ar[dr] \ar[d] \\
+		P(Y_2) \ar[r]_{P(\varphi_2)} & P(X_2)
+	}\]
+	since $\varphi_2$ is cartesian, these unique morphisms must be equal. Thus $Q \mor Y_1$ is a cone morphism and unique. Hence the square is a pullback.
+\end{proof}
+\section{Fibrations of 2-categories}
+
+We recall some basic aspects of fibred 2-categories from \cite{Hermida99}
+
+\begin{definition}
+	Let $\fib$ be a 2-functor. A morphism $f \colon X \mor Y$ is said to be cartesian if it is cartesian in a sense of Definition \ref{cartesian} and additionally, for any 2-cells $\sigma \colon h \2cell k \colon Z \mor Y$ and $\gamma \colon v \2cell u \colon PZ \mor PX$, and the lifts $\tilde{v}$ and $\tilde{u}$ of $v$ and $u$ exist, then there is a unique 2-cell $\tilde{\gamma} \colon \tilde{v} \2cell \tilde{u} \colon Z \mor X$.
+\end{definition}
+
+\[ \xymatrix{
+	Z \ddtwocell^{\tilde{u}}_{\tilde{v}}{\tilde{\gamma}} \ddrrtwocell^{h}_{k}{\alpha}  && && PZ \ddtwocell^{u}_{v}{\gamma} \ddrrtwocell^{Ph}_{Pk}{P\alpha}  \\
+	\\ 
+	X \ar[rr]_{f} && Y && PX \ar[rr]_{Pf} && PY
+}
+\]
+
+\section{Fibrant Double Categories}
+
+A double category $\mathbb{D}$ is said to have vertical pullbacks if the structure
+
+\begin{equation*}
+	\xymatrix{
+		\cat{D}_1 \times_{\cat{D}_0} \cat{D}_1 \ar[r]|-{\odot} & \cat{D}_1 \ar@<1ex>[r]^{s} \ar@<-1ex>[r]_{t} & \cat{D}_0 \ar[l]|-{i}
+	}
+\end{equation*}
+lies in $\mathbf{PBCat}$, the category of categories with pullbacks and pullback-preserving functors. Given a pullback in $\mathcal{D}_0$ we can get the corresponding square of unit of cells in $\mathcal{D}_1$ which is a pullback. $\odot$ preserves pullbacks \ie, we can horizontally compose two vertical pullback squares and obtain a vertical pullback sqaure. This is essentially having a functorial choice of pullbacks.
+
+\begin{definition}[Beck-Chevalley Condition]\label{Double BCC Cell}
+	For each pullback of vertical arrows 
+	\begin{equation*}
+		\xymatrix{
+			{} \ar[r]^{q} \ar[d]_{p} \pullbackcorner & {} \ar[d]^{v}\\
+			{} \ar[r]_{u} & {}
+		}
+	\end{equation*}
+	the cell 
+	\begin{equation*}
+		\xymatrix{
+			{} \ar[r]|-{\shortmid}^-{p^*} \ar@2{-}[d] \ar@{} [dr]|{\Downarrow} & {} \ar[r]|-{\shortmid}^-{U} \ar[d]_{p} & \ar@{} [dr]|{\Downarrow} {} \ar[d]^{q} \ar[r]|-{\shortmid}^-{q_!} & {} \ar@2{-}[d] \\
+			{} \ar[r]|-{\shortmid}_-{U} \ar@2{-}[d] \ar@{} [dr]|{\Downarrow} & {} \ar[d]_{u}  & {} \ar@{} [dr]|{\Downarrow} \ar[r]|-{\shortmid}_-{U}  \ar[d]^{v}& {} \ar@2{-}[d] \\
+			{} \ar[r]|-{\shortmid}_-{u_!} & {} \ar[r]|-{\shortmid}_-{U} & {} \ar[r]|-{\shortmid}_-{v^*} & {}
+		}
+	\end{equation*}
+	is invertible.
+\end{definition}
+
+\begin{definition}\cite{MR2720187}
+	A fibrant double category $\mathbb{D}$ has internal sums whenever the fibration $(s,t) \colon \cat{D}_1 \mor \cat{D}_0 \times \cat{D}_0$ has internal sums \ie, opcartesian lifts of $(s,t)$ satisfy the Beck-Chevalley Condition. 
+\end{definition}
+
+\begin{example}\cite{hermida2011categorical}
+	$\mathbb{S}$pan($\cat{C}$) as a fibrant double category has internal sums. For a vertical arrow $f \colon X \mor Y$, the extension and restriction along $f$ are given by $\hspan{X}{X}{Y}{id}{f}$ and $\hspan{Y}{X}{X}{f}{id}$
+%	\xymatrix@=0.5cm{
+%		X & X \ar[l]^{id} \ar[r]_{f} & Y
+%	}
+%	and 
+%	\xymatrix@=0.5cm{
+%		Y & X\ar[l]^{f} \ar[r]_{id} & X
+%	}
+	respectively.
+	
+	\vspace{0.5cm}
+	Note that any span $R \colon \proar{A}{B}$ can be factors as $\delta^* \circ \varepsilon_!$
+	where 
+	\begin{equation*}
+		\delta^* = 
+		\vcenter{\vbox{\xymatrix{
+					&R \ar[dl]_{\delta} \ar[dr] \\
+					A && R
+		}}} \qquad
+		\varepsilon_! =
+		\vcenter{\vbox{\xymatrix{
+					&R \ar[dl] \ar[dr]^{\varepsilon} \\
+					R && B
+		}}}
+	\end{equation*}
+	More generally we have two embeddings ${}_! \colon \cat{C} \mor \bspan{\cat{C}}$ and ${}^* \colon \cat{C}^{\text{op}} \mor \bspan{\cat{C}}$ such that $f_! \adj f^*$ for $f \colon X \mor Y$. These right adjoints satisfy the Beck-Chevalley Condition 
+	\begin{equation*}
+		\vcenter{\vbox{\xymatrix{
+					{} \ar[r]^{q} \ar[d]_{p} \pullbackcorner & {} \ar[d]^{u} \\
+					{} \ar[r]_{v} & {}
+		}}} \quad \implies \quad q_! p^* \isom u^* v_!
+	\end{equation*}
+	\ie
+	\begin{equation*}
+		\vcenter{\vbox{\xymatrix{
+					&{} \ar[dl]_{p} \ar[dr]^{id} && {} \ar[dl]_{id} \ar[dr]^{q} \\
+					X && {} && Y 
+			}}} \quad
+		\isom
+		\quad
+		\vcenter{\vbox{\xymatrix{
+					&{} \ar[dl]_{id} \ar[dr]^{v} && {} \ar[dl]_{u} \ar[dr]^{id} \\
+					X && {} && Y 
+		}}}
+	\end{equation*}
+\end{example}
+
+\begin{remark}
+	The above span factorization property is inherited by $\mathbb{R}$el as a bicategory. Similarly, we can express a relation $R \colon \proar{X}{Y}$ from $X$ to $Y$ as a span. Composition is given by pullback and 2-cells are just the morphism between the two top objects of the spans. Whence both $\mathbb{R}$el and $\dspan{\cat{C}}$ have internal sums. The Beck-Chevalley Cell in Definition \ref{Double BCC Cell} can be seen from the example above.
+\end{remark}
+
+
+\section{Double Fibred Limits}
+Fix $\dcat{B}$ a pseudo category in $\mathbf{PBCat}$, a category of categories with pullbacks and pullback-preserving functors. 
+
+\subsection{Double Terminals}
+Consider a double category $\mathbb{D}$ as a pseudo category in $\mathbf{TCat}$, the category of categories with terminal objects. A terminal object $T$ in $\mathbb{D}_0$ gives rise to a terminal object $U_T$ in $\mathbb{D}_1$ such that for any proarrow $\inproar{M}{A}{B}$ there is precisely one cell
+\begin{equation*}
+	\xymatrix{
+		A \ar[d] \ar[r]^{M}|{\shortmid} \ar@{} [dr]|{\theta} & B \ar[d] \\
+		T \ar[r]_{U_T}|{\shortmid} & T
+	}
+\end{equation*}
+from $M$ to $U_T$, for any object $M \in \mathbb{D}_1$. This is referred to as the 2-dimensional property of a terminal object. \\ 
+
+\begin{definition}
+	A strict double functor $\cat{F} \colon \dcat{E} \mor \dcat{B}$ between pseudo double categories is a double fibration of double categories with terminal objects iff every fibre has a terminal object for $\cat{F}_0$ and $\cat{F}_1$.
+\end{definition}
+
+\begin{remark}
+	$\cat{F}_0 \colon \dcat{E}_0 \mor \dcat{B}_0$ is an ordinary fibration of categories with terminal objects.
+\end{remark}
+Let us explicate the fibre at level 1: Let $M \in \dcat{B}_1$ be an object, the fibre $\cat{F}_1(M)$ consists of proarrows $N$ such that $\cat{F}_1N = M$ and cells
+\begin{equation*}
+	\xymatrix{
+		{} \ar[r]^{N}|{\shortmid} \ar@{}[dr]|{\theta} \ar[d] & {} \ar[d] \\
+		{} \ar[r]_{L}|{\shortmid} & {}
+	}
+\end{equation*}
+over the globular cell
+\begin{equation*}
+	\xymatrix{
+		{} \ar[r]^{M}|{\shortmid} \ar@{=}[d]  \ar@{}[dr]|{\cat{F}_1\theta} & {} \ar@{=}[d] \\
+		{} \ar[r]_{M}|{\shortmid} & {}
+	}
+\end{equation*}
+
+\begin{remark}
+	We shall call cells in the fibre \emph{vertical cells}.
+\end{remark}
+\begin{definition}
+	$\cat{F}_1 \colon \dcat{E}_1 \mor \dcat{B}_1$ is a fibration of categories with terminal objects in the sense that a terminal in the fibre of $M$ is an object $\inproar{U_T}{T}{T}$ such that for any other object $X$ in the fibre is a unique cell 
+	
+	\begin{equation*}
+		\xymatrix{
+			{} \ar[r]^{X}|{\shortmid} \ar[d] & {} \ar[d] \\
+			T \ar[r]_{U_T}|{\shortmid} & T
+		}
+	\end{equation*}
+	over 
+	\begin{equation*}
+		\xymatrix{
+			{} \ar[r]^{N}|{\shortmid} \ar[d] \ar@{} [dr]|{u} & {} \ar[d] \\
+			{} \ar[r]_{M}|{\shortmid} & {}
+		}
+	\end{equation*}
+	
+\end{definition}
+
+\begin{proposition}
+	Let $\dcat{B}$ also have terminal objects. A strict double fibration $\dfib{F}{E}{B}$ is a double fibration of double categories with terminal objects if and only if $\dcat{E}$ has a terminal $T$ with $FT$ terminal in $\dcat{B}$.
+\end{proposition}
+
+\begin{proof}
+	Straightfoward application of Lemma \eqref{terminals} in 2-dimensional way.
+	
+\end{proof}
+
+\subsection{Double Fibred Pullbacks}
+
+\begin{proposition}
+	Consider a commuting cube
+	\begin{equation*}
+		\xymatrix{
+			&K \ar@{=}[rr] \ar[dd]|\hole \ar[dl] && K \ar[dd] \ar[dl] \\
+			L \ar@{=}[rr] \ar[dd] && L \ar[dd] \\
+			& I \ar@{=}[rr]|\hole \ar[dl]  && I \ar[dl]  \\
+			J \ar@{=}[rr] && J
+		}
+	\end{equation*}
+	where the top and bottom faces are cartesian cells and the front and back faces are vertical is always a pullback in $\dcat{E}_1$. 	We shall write $(\mathbf{T}), (\mathbf{F}), (\mathbf{B}), (\mathbf{L}), (\mathbf{R}), (\mathbf{G})$ for the top, front, back, left, right, and bottom faces respectively.
+\end{proposition}
+
+\begin{proof}
+	The $(\mathbf{T})$ and $(\mathbf{G})$ faces are cartesian since the identity functor $i \colon \dcat{E}_0 \mor \dcat{E}_1$ preserves cartesian morphisms. For a double cone $C$ over ($\mathbf{F}$) and ($\mathbf{G}$) we have 
+	\begin{equation*}
+		\vcenter{\vbox{\xymatrix{
+					X \ar[d]_{x_I} \ar[r]|{\shortmid}^{C} \ar@{}[dr]|{\gamma_I} & Y \ar[d]^{y_I} \\					
+					I \ar@{=}[r] & I
+		}}} \qquad
+		\vcenter{\vbox{\xymatrix{
+					X \ar[d]_{x_L} \ar[r]|{\shortmid}^{C} \ar@{}[dr]|{\gamma_L} & Y \ar[d]^{y_L} \\					
+					L \ar@{=}[r] & L
+		}}}
+	\end{equation*}
+	such that
+	\begin{equation*}
+		\vcenter{\vbox{\xymatrix{
+					X \ar[d]_{x_I} \ar[r]|{\shortmid}^{C} \ar@{}[dr]|{\gamma_I} & Y \ar[d]^{y_I}	 \\
+					I \ar[d] \ar@{=}[r] & I \ar[d] \\
+					J \ar@{=}[r] & J
+		}}} \quad
+		=
+		\quad
+		\vcenter{\vbox{\xymatrix{
+					X \ar[d]_{x_L} \ar[r]|{\shortmid}^{C} \ar@{}[dr]|{\gamma_L} & Y \ar[d]^{y_L}	 \\
+					L \ar[d] \ar@{=}[r] & L \ar[d] \\
+					J \ar@{=}[r] & J
+		}}}
+	\end{equation*} 
+	since ($\mathbf{T}$) is cartesian there is a unique cell 
+	
+	\begin{equation*}
+		\xymatrix@=1cm{
+			X \ar@{-->}[d]_{x_K} \ar[r]|{\shortmid}^{C} \ar@{}[dr]|{\tilde{\gamma}_K} & Y \ar@{-->}[d]^{y_K} \\
+			K \ar@{=}[r] & K
+		}
+	\end{equation*}
+	there is another unique cell $\tilde{\gamma}_I$ that we started with given by the composition
+	
+	\begin{equation*}
+		\xymatrix@=1cm{
+			X \ar[d] \ar[r]|{\shortmid}^{C} \ar@{}[dr]|{\tilde{\gamma}_K} & Y \ar[d] \\
+			K \ar[d] \ar@{=}[r] & K \ar[d] \\
+			I \ar@{=}[r] & I 
+		}
+	\end{equation*}
+	Since ($\mathbf{G}$)	is cartesian, these unique cells must be equal. Thus the cell $\tilde{\gamma}_K$ is the unique cone morphism.
+\end{proof} 
+
+\begin{proposition}
+	If $\dfib{P}{E}{B}$ is a double fibration of double categories with pullbacks then every pullback in a fibre is a pullback in $\dcat{E}$. 
+\end{proposition}
+
+\begin{proof}
+	Clearly, this is true for the fibration $\cat{P}_0$. To show this for $\cat{P}_1$, let
+	\begin{equation*}\label{pullbackcube} \tag{$\dagger$}
+		\xymatrix@=1cm{
+			&L \ar@{=}[rr] \ar[dd]|\hole \ar[dl]_{\tilde{v}} && L \ar[dd]^{k} \ar[dl]_{\tilde{v}} \\
+			I \ar@{=}[rr] \ar[dd]_{u} && I \ar[dd] \\
+			& K \ar@{=}[rr]|\hole \ar[dl]_{v}  && K \ar[dl]_{v}  \\
+			J \ar@{=}[rr] && J
+		}
+	\end{equation*}
+	be a pullback in $\dcat{E}_1$ over  $\inproar{M}{}{} \in \dcat{B}_1$. Consider the following diagram 
+	\begin{equation*}
+		\xymatrix@=1cm{
+			X \ar@/_3pc/[ddd]_{x_K} \ar[d]_{x_I} \ar[r]|{\shortmid}^{C} & Y \ar[d]^{y_I} \ar@/^3pc/[ddd]^{y_K} \\
+			I \ar[d]_{u} \ar@{=}[r] & I \ar[d]^{u} \\
+			J \ar@{=}[r] & J \\
+			K \ar[u]^{v} \ar@{=}[r] & K \ar[u]_{v}
+		}
+	\end{equation*}
+	with $v \comp x_K = u \comp x_I$ and $v \comp y_K = u \comp y_I$ for an object ${C} \in \dcat{E}_1$ \ie, a cone over ($\mathbf{F}$) and ($\mathbf{G}$). The cells 
+	\begin{equation*}
+		\vcenter{\vbox{\xymatrix{
+					X \ar[d]_{x_K} \ar[r]|{\shortmid}^{C} & Y \ar[d]^{y_K} \\
+					K \ar@{=}[r] & K
+		}}}
+		\qquad
+		\vcenter{\vbox{\xymatrix{
+					X \ar[d]_{x_I} \ar[r]|{\shortmid}^{C} & Y \ar[d]^{y_I} \\
+					I \ar@{=}[r] & I
+		}}}
+	\end{equation*}
+	lie over the same cell $\theta \colon N \mor M$ in $\dcat{B}_1$. Let the cells 
+	\begin{equation*}
+		\vcenter{\vbox{\xymatrix{
+					f^*K \ar[d]_{\cleav{f}{K}} \ar@{=}[r] & f^*K \ar[d]^{\cleav{f}{K}} \\
+					K \ar@{=}[r] & K
+		}}}
+		\qquad
+		\vcenter{\vbox{\xymatrix{
+					f^*I \ar[d]_{\cleav{f}{I}} \ar@{=}[r] & f^*I \ar[d]^{\cleav{f}{I}} \\
+					I \ar@{=}[r] & I
+		}}}
+	\end{equation*}
+	be cartesian \ie, the vertical arrows are cartesian lifts of $f$ in the base. Moreover, let 
+	\begin{equation*}
+		\vcenter{\vbox{\xymatrix{
+					X \ar[d] \ar[r]|{\shortmid}^{C} & Y \ar[d] \\
+					f^*K \ar@{=}[r] & f^*K
+		}}}
+		\qquad
+		\vcenter{\vbox{\xymatrix{
+					X \ar[d] \ar[r]|{\shortmid}^{C} & Y \ar[d] \\
+					f^*I \ar@{=}[r] & f^*I
+		}}}
+	\end{equation*}
+	be vertical cells over $\inproar{N}{}{}$. We know that \eqref{pullbackcube} is a pullback under change of base, there is a vertical cell
+	\begin{equation*}
+		\xymatrix@=1cm{
+			X \ar[d] \ar[r]|{\shortmid}^{C} & Y \ar[d] \\
+			f^*L \ar@{=}[r] & f^* L
+		}
+	\end{equation*}
+	with 
+	\begin{equation*}
+		\vcenter{\vbox{\xymatrix{
+					X \ar[d] \ar[r]|{\shortmid}^{C} & Y \ar[d] \\
+					f^*K \ar@{=}[r] & f^*K
+		}}}
+		\quad
+		=
+		\quad
+		\vcenter{\vbox{\xymatrix{
+					X \ar[d] \ar[r]|{\shortmid}^{C} & Y \ar[d] \\
+					f^*L \ar[d] \ar@{=}[r] & f^*L \ar[d] \\
+					f^*K \ar@{=}[r] & f^*K
+		}}}
+	\end{equation*}
+	similarly for $f^*I$. We obtain the following diagram 
+	\begin{equation*}
+		\xymatrix@=1cm{
+			X  \ar[d] \ar[rrrrrr]|{\shortmid}^{C}  &&&&&& Y \ar[d] \\
+			f^*L \ar@{=}[rr] \ar[dr] \ar[dd] && f^*L \ar[dr] \ar[dd]|\hole \ar@{=}[rr] && f^*L \ar[dr] \ar[dd]|\hole \ar@{=}[rr] && f^*L \ar[dr]\ar[dd]|\hole \\
+			& L \ar@{=}[rr] \ar[dd] && L \ar[dd] \ar@{=}[rr] && L \ar[dd] \ar@{=}[rr] && L \ar[dd] \\
+			f^*K \ar@{=}[rr]|\hole \ar[dr] \ar[dd] && f^*K \ar[dd]|\hole  \ar[dr] && f^*I \ar[dr] \ar[dd] \ar@{=}[rr]|\hole && f^*I \ar[dr] \ar[dd]|\hole \\
+			& K \ar@{=}[rr] \ar[dd] && K \ar[dd]  && I \ar[dd] \ar@{=}[rr] && I \ar[dd] \\
+			f^*J \ar@{=}[rr]|\hole \ar[dr] && f^*J \ar[dr] \ar@{=}[rr]|\hole && f^*J \ar[dr] \ar@{=}[rr]|\hole && f^*J \ar[dr] \\
+			& J \ar@{=}[rr] && J \ar@{=}[rr] && J \ar@{=}[rr] && J
+		}
+	\end{equation*}
+	where the cells 
+	\begin{equation*}
+		\vcenter{\vbox{\xymatrix{
+					f^*L \ar[d]_{\cleav{f}{L}} \ar@{=}[r] \ar@{}[dr]|{\text{cart}} & f^*L \ar[d]^{\cleav{f}{L}} \\
+					L \ar@{=}[r] & L
+		}}}
+		\qquad
+		\vcenter{\vbox{\xymatrix{
+					f^*K \ar[d]_{\cleav{f}{K}} \ar@{=}[r] \ar@{}[dr]|{\text{cart}} & f^*K \ar[d]^{\cleav{f}{K}} \\
+					K \ar@{=}[r] & K
+		}}}
+		\qquad
+		\vcenter{\vbox{\xymatrix{
+					f^*I \ar[d]_{\cleav{f}{I}} \ar@{=}[r] \ar@{}[dr]|{\text{cart}} & f^*I \ar[d]^{\cleav{f}{I}} \\
+					I \ar@{=}[r] & I
+		}}}
+	\end{equation*}
+	are cartesian. The desired cell is given by 
+	\begin{equation*}
+		\vcenter{\vbox{\xymatrix{
+					X \ar[d] \ar[r]|{\shortmid}^{C} \ar@{}[dr]|{\xi} & Y \ar[d] \\
+					L \ar@{=}[r] & L
+		}}}
+		\qquad
+		=
+		\qquad
+		\vcenter{\vbox{\xymatrix{
+					X \ar[d] \ar[r]|{\shortmid}^{C}  \ar@{}[dr]|{\gamma}& Y \ar[d] \\
+					f^*L \ar[d]_{\cleav{f}{L}} \ar@{=}[r] \ar@{}[dr]|{\psi} & f^*L \ar[d]^{\cleav{f}{L}} \\
+					L \ar@{=}[r] & L
+		}}}
+	\end{equation*}
+	For any other cell $\xi' = \frac{\gamma'}{\psi}$. It follows that $\gamma' = \gamma$ as both are mediating arrows to the pullback under change of base for the cone given by vertical cells into $f^*K$ and $f^*I$ and therefore, it follows that $\xi = \xi'$.
+	
+\end{proof}
+
+\subsection{Tabulators and Fibred Tabulators}
+\begin{definition}\label{tabulator}
+	In a double category $\dcat{D}$, a \emph{1-tabulator} of a proarrow $M$ is an object $1^{\bullet}_{T}$ together with a cell
+	\begin{equation*}
+		\xymatrix@=1cm{
+			T \ar@{=}[r] \ar[d] \ar@{}[dr]|{\pi} & T \ar[d] \\
+			{} \ar[r]|{\shortmid}_M & {}
+		}
+	\end{equation*}
+	such that for any other cell 
+	\begin{equation*}
+		\xymatrix{
+			R \ar@{=}[r] \ar[d] \ar@{}[dr]|{\pi \prime} & R \ar[d] \\
+			{} \ar[r]|{\shortmid}_M & {}
+		}
+	\end{equation*}
+	we have 
+	\begin{equation*}
+		\vcenter{\vbox{\xymatrix{
+					R \ar@{=}[r] \ar[d] \ar@{}[dr]|{\pi \prime} & R \ar[d] \\
+					{} \ar[r]|{\shortmid}_M & {}
+		}}}
+		\quad
+		=
+		\quad
+		\vcenter{\vbox{\xymatrix{
+					R \ar@{=}[r] \ar@{-->}[d]_k \ar@{}[dr]|{U_{k}} & R \ar@{-->}[d]^k \\
+					T \ar@{=}[r] \ar[d] \ar@{}[dr]|{\pi} & T \ar[d] \\
+					{} \ar[r]|{\shortmid}_M & {}
+		}}}
+	\end{equation*}
+\end{definition}
+
+
+\begin{lemma}[Grandis-Parè]
+	A double category $\dcat{D}$ has 1-tabulators if and only if the functor $i \colon \dcat{D}_0 \mor \dcat{D}_1$ has a right adjoint. 
+\end{lemma}
+
+We shall refer to 1-tabulators with tabulators only.
+
+\begin{definition}
+	Let $\dcat{B}$ be a double category with tabulators. A strict double fibration $\dfib{P}{E}{B}$ is double fibration of double categories with tabulators if and only if every fibre has tabulators and they are stable reindexing.
+\end{definition}
+
+\begin{lemma}\label{carttabulator}
+	For a double fibration $\dfib{P}{E}{B}$, a cartesian cells of the form 
+	\begin{equation*}
+		\xymatrix@=1cm{
+			{}  \ar[d] \ar@{=}[r] \ar@{}[dr]|{\text{cart}} & {} \ar[d] \\
+			{} \ar@{=}[r] & {}
+		}
+	\end{equation*}
+	can be reduced to tabulators of proarrow identities in $\dcat{E}$. 
+\end{lemma}
+\begin{proof}
+	Immediate from Definition \ref{tabulator}.
+\end{proof}
+
+\begin{lemma}\label{localtabulator}
+	For a double fibration $\dfib{P}{E}{B}$ of double categories with tabulators, a tabulator in a fibre is a tabulator in $\dcat{E}$.
+\end{lemma}
+
+\begin{proof}
+	Let 
+	\begin{equation*}
+		\xymatrix@=1cm{
+			Tu \ar@{=}[r] \ar[d]_{l} \ar@{}[dr]|{\pi_u} & Tu \ar[d]^{k} \\
+			A \ar[r]|{\shortmid}_u & B
+		}
+	\end{equation*}
+	be a tabulator over $1^{\bullet}_{M}$  and $1^{\bullet}_{f} \colon 1^{\bullet}_{N} \mor 1^{\bullet}_{M}$ be a cell in $\dcat{B}$ . Consider a double cone over $\pi_u$ given by 
+	\begin{equation*}
+		\xymatrix@=1cm{
+			&C \ar[dl]_{c_T} \ar[ddl]|\hole^(.59){h_1} \ar[dr]^{c_T} \ar[ddr]|\hole_(.59){h_2}\\
+			Tu \ar[d]_{l} \ar@{=}[rr] && Tu \ar[d]^{k} \\
+			A \ar[rr]|{\shortmid}_u && B
+		}
+	\end{equation*}
+	with $k \comp c_T = h_2$ and $l \comp c_T = h_1$. Clearly, the cell 
+	\begin{equation*}
+		\xymatrix@=1cm{
+			C \ar@{=}[r] \ar[d]_{h_1} \ar@{}[dr]|{\theta} & C \ar[d]^{h_2} \\
+			A \ar[r]|{\shortmid}_u & B
+		}
+	\end{equation*}
+	lies over $1^{\bullet}_{f}$ in $\dcat{B}$.
+	Let 
+	\begin{equation*}
+		\xymatrix@=1cm{
+			C \ar[d]_{h^*_1} \ar@{=}[r] \ar@{}[dr]|{\theta^*} & C \ar[d]^{h^*_2} \\
+			f^*A \ar[d]_{\cleav{f}{A}} \ar[r]|{\shortmid}_{u^*} \ar@{}[dr]|{\text{cart}} & f^*B \ar[d]^{\cleav{f}{B}} \\
+			A \ar[r]|{\shortmid}_{u} & B
+		}
+	\end{equation*}
+	be the vertical-cartesian factorization of $\theta$. Since every fibre has a tabulator, there is a vertical cell
+	\begin{equation*}
+		\xymatrix@=1cm{
+			C \ar[d]_{c^*_T} \ar@{=}[r] \ar@{}[dr]|{\gamma} & C \ar[d]^{c^*_T} \\
+			f^*Tu \ar@{=}[r] & f^*Tu
+		}
+	\end{equation*}
+	such that
+	\begin{equation*}
+		\vcenter{\vbox{\xymatrix{
+			C \ar[d]_{c^*_T} \ar@{=}[r] \ar@{}[dr]|{\gamma} & C \ar[d]^{c^*_T} \\
+			f^*Tu \ar[d]_{l^*} \ar@{=}[r] \ar@{}[dr]|{\pi^*_u} & f^*Tu \ar[d]^{h^*}	\\	
+			f^*A \ar[r]|{\shortmid}_{u^*} & f^* B
+		}}}
+		\quad
+		=
+		\quad	
+		\vcenter{\vbox{\xymatrix{
+			C \ar[d]_{h^*_1} \ar@{=}[r] \ar@{}[dr]|{\theta^*} & C \ar[d]^{h^*_2} \\
+			f^*A \ar[r]|{\shortmid}_{u^*} & f^* B	
+		}}}
+	\end{equation*}
+	We obtain the following diagram
+	\begin{equation*}
+		\xymatrix@=1cm{
+			&& C \ar[ddrr]^{h^*_2} \ar[ddll]_{h^*_1} \ar[d]_{\gamma} \\
+			&& f^*Tu \ar[dll]^{l^*} \ar[drr]_{k^*} \ar[dd]|\hole_(.20){\xi}
+			\\
+			f^*A \ar[dd]_{\cleav{f}{A}}\ar[rrrr] &&&& f^*B \ar[dd]^{\cleav{f}{B}}\\
+			&& Tu \ar[dll]_{l} \ar[drr]^{k} \\
+			A \ar[rrrr]|{\shortmid}_{u} &&&& B
+		}
+	\end{equation*}
+	The cell 
+	\begin{equation*}
+		\vcenter{\vbox{\xymatrix{
+					C \ar[d]_{c_T} \ar@{=}[r] \ar@{}[dr]|{\omega} & C \ar[d]^{c_T} \\
+					Tu \ar@{=}[r] & Tu
+		}}}
+		\quad
+		=
+		\quad
+		\vcenter{\vbox{\xymatrix{
+					C \ar[d]_{c^*_T} \ar@{=}[r] \ar@{}[dr]|{\gamma} & C \ar[d]^{c^*_T} \\
+					f^*Tu \ar@{=}[r] \ar[d]_{t} \ar@{}[dr]|{\psi} & f^*Tu \ar[d]^{t} \\
+					Tu \ar@{=}[r] & Tu
+		}}}
+	\end{equation*}
+	is the desired mediating cell.
+\end{proof}
+
+I have made this interesting observation:
+\begin{lemma}\label{pulltabulators}
+	For a a strict double fibration $\dfib{P}{E}{B}$ of double categories with tabulators. For a commuting cube
+	\begin{equation*}
+		\xymatrix@=1cm{
+			&{} \ar[rr] \ar[dd]|\hole \ar[dl]_{\tilde{v}} && {} \ar[dd]^{k} \ar[dl]_{\tilde{v}} \\
+			{} \ar[rr] \ar[dd]_{u} && {} \ar[dd] \\
+			& {} \ar[rr]|\hole \ar[dl]_{v}  && {} \ar[dl]_{v}  \\
+			{} \ar[rr] && {}
+		}
+	\end{equation*}
+	given by $(\mathbf{T}), (\mathbf{F}), (\mathbf{B}), (\mathbf{L}), (\mathbf{R}), (\mathbf{G})$ as the top, front, back, left, right, and bottom faces respectively, we have the following
+	\begin{enumerate}
+		\item If ($\mathbf{B}$) is tabulator cell and ($\mathbf{G}$) is cartesian, then ($\mathbf{T}$) is cartesian
+		\item If ($\mathbf{F}$) is a tabulator and ($\mathbf{G}$) is cartesian then ($\mathbf{B}$) is a tabulator if and only if ($\mathbf{T}$) is cartesian.
+		\item If ($\mathbf{T}$) and ($\mathbf{B}$) are tabulator cells and ($\mathbf{G}$) is cartesian, then the cube is a pullback.
+	\end{enumerate}
+\end{lemma}
+
+\begin{remark}
+	Condition 2 in Lemma \ref{pulltabulators} is a Beck-Chevalley like condition for fibred tabulators. 
+\end{remark}
+
+\begin{remark}
+	In the above formulation, we require the source $s$ and target $t$ maps to preserve the fibre structure. Moreover, each property of a double fibration (\ie, terminal objects or pullbacks) should lie in the 2-category of fibrations with terminal objects or pullbacks. Since tabulators only appear in the double categorical case, the treatment is purely double categorical. 
+\end{remark}
+
+Since we gave a characterization theorem for double terminals, we also have the following characterization theorems for pullbacks and tabulators.
+
+\begin{theorem}
+	A double fibration $\dfib{P}{E}{B}$ is a double fibration of double categories with pullbacks if and only if $\dcat{E}$ has and $\cat{P}$ preserve them.
+\end{theorem}
+This follows readily from the double fibration structure since it holds for $\cat{P}_0$. However, the following theorem does not.
+
+\begin{theorem}
+	Let $\dcat{B}$ have tabulators. A double fibration $\dfib{P}{E}{B}$ is a double fibration of double categories with tabulators if and only if $\dcat{E}$ has tabulators  and $\cat{P}$ preserves them. 
+\end{theorem}
+\begin{proof}
+	Let 
+	\begin{equation*}
+		\xymatrix@=1cm{
+			A \ar@{=}[r] \ar[d]_{g} & A \ar[d]^{g}\\
+			B \ar@{=}[r] & B
+		}
+	\end{equation*}
+	be a cell in $\dcat{E}$. Consider the following diagram
+	\begin{equation*}
+		\xymatrix@=1cm{
+			A \ar@{=}[r] \ar[d]_{a} \ar@{}[dr]|{\pi_{f^*B}} & A \ar[d]^{a}\\
+			f^*B \ar@{=}[r] \ar[d]_{\cleav{f}{B}} \ar@{}[dr]|{\epsilon} & f^*B \ar[d]^{\cleav{f}{B}} \\
+			B \ar@{=}[r] & B
+		}
+	\end{equation*}
+	where $\epsilon$ is cartesian over $1^{\bullet}_{f} \colon 1^{\bullet}_{N} \mor 1^{\bullet}_{M}$ and $\pi_{f^*B}$ is a tabulator in the fibre. Then $\pi_{f^*B}$ is a tabulator in $\dcat{E}$ by Lemma \ref{localtabulator} and $\epsilon$ is a tabulator in $\dcat{E}$ by Lemma \ref{carttabulator}. It remains to see that the composite $\frac{\pi_{f^*B}}{\epsilon}$ is a tabulator in $\dcat{E}$. 
+	
+	
+\end{proof}
+
+
+
+\section{Dual Notions}
+\subsection{2-Opfibrations}
+\begin{definition}
+	A 2-functor $P \colon \cat{E} \mor \cat{B}$ is a 2-opfibration if the following hold
+	\begin{enumerate}
+		\item For any $e \in \cat{E}$  and $u \colon Pe \mor b$, there is an opcartesian lift $\bar{u} \colon e \mor u_!e$ with $P\bar{u} = u$ ;
+		\item for any $g \in \cat{E}$ and $\alpha \colon Pg \2cell h$, there is an opcartesian lift $\bar{\alpha} \colon g \2cell \alpha_!g$ with $P\bar{\alpha} = \alpha$; and 
+		\item Horizontal composition of opcartesian 2-cells is again opcartesian.
+	\end{enumerate}
+\end{definition}
+
+\begin{remark}
+	The above definition refers to coop-2-fibrations as 2-opfibrations. Comparing to Hermida, opcartesian 1-cells and 2-cells would be defined using pre-composition instead of post-composition.
+\end{remark}
+
+\subsection{Double Bifibrations}
+A strict double functor $\mathscr{P} \colon \mathbb{E} \mor \mathbb{B}$ defines a double fibration if the components $P_0$ and $P_1$ are fibrations. We say $\mathscr{P}$ is a double fibration if in addition the components $P_0$ and $P_1$ are opfibrations. 
+\subsubsection{Relation to 2-fibrations}
+\begin{proposition}
+	A 2-functor $\mathscr{P} \colon \cat{E} \mor \cat{B}$ is a 2-fibration if and only if $Q(\mathscr{P}) \colon Q(\cat{E}) \mor Q(\cat{B})$ is a double fibration. 
+\end{proposition}
+
+\begin{proof}($\2cell$) 
+	The cartesian 1-cells make the functor $Q(P_0)=|P| \colon |\cat{E}| \mor |\cat{B}|$ an ordinary fibration. We are required to show: $Q(P)_1$ is a fibration and the external source and target maps of $Q(\cat{E})$ are cleavage-preserving. To this end suppose there is an object $\proar{X}{Y}$ in $Q(\cat{E})_1$ and a morphism
+	\begin{equation*}
+		\xymatrix{
+			A \ar[r]^{u} \ar[d]_{f} \ar@{}[dr]|{\Downarrow \alpha} & B \ar[d]^{g} \\
+			PX \ar[r]_{Pv} & PY
+		}
+	\end{equation*}
+	in $Q(\cat{B})_1$. The lift of $\alpha$ in $Q(\cat{E})_1$ can be constructed as follows: Since $\mathscr{P}$ is locally a fibration, the cartesian lift $\tilde{\alpha}$ of $\alpha$ exists. Since $\sigma(g,Y)$ is cartesian, there is a unique $\tilde{u} \colon f^*X \mor g^*Y$ such that the following triangle commutes
+	
+	\begin{equation}\label{cart2cell} \tag{$\clubsuit$}
+		\xymatrix{
+			f^*X \ar@{-->}[r]^{\tilde{u}} \ar[d]_{\sigma(f,X)} \ar@{}[dr]|{\Downarrow \tilde{\alpha}} & g^*Y \ar[d]^{\sigma(g,Y)}\\
+			X \ar[r]_v & Y
+		}
+	\end{equation}
+	Claim: \eqref{cart2cell} is cartesian w.r.t $Q(P)_1$
+	\begin{proof}
+		Since the vertical arrows are cartesian and the 2-cell is cartesian, this means $\eqref{cart2cell}$ will be $Q(P)_1-$cartesian.
+	\end{proof}
+
+	
+	
+\end{proof}
+
+\section{Double Internal Products}
+
+Double Evaluation Spans
+
+\begin{equation*}
+	\xymatrix{
+		X \ar@{=}[rr] && X \\
+		& u^*Z \ar@{=}[rr] \ar[dd]|\hole \ar[dl] \ar[lu] && u^*Z \ar[lu] \ar[dl] \ar[dd]  \\
+		u^*E \ar@{=}[rr] \ar[dd] \ar[uu] && u^*E \ar[dd]|\hole \ar[uu]|\hole \\
+		& Z  \ar@{=}[rr] \ar@{-->}[dl] && Z  \ar@{-->}[dl]\\
+		E \ar@{=}[rr] && E
+	}
+\end{equation*}
+
+
+
+
+
+%% Maybe I need to add one more part: Examples.
+%% Set style and colour later.
+%
+%\subsection{Pictures}
+%
+%\begin{figure}[htbp]
+%    \center
+%    \includegraphics[scale=0.06]{img/photo.jpg}
+%    \caption{Sydney, NSW}
+%\end{figure}
+
+%\subsection{Citation}
+%
+%This is a citation\cite{Eg}.
+
+\newpage
+
+% ------------------------------------------------------------------------------
+% Reference and Cited Works
+% ------------------------------------------------------------------------------
+
+\bibliographystyle{IEEEtran}
+\bibliography{references.bib}
+
+
+% ------------------------------------------------------------------------------
+
+\end{document}
